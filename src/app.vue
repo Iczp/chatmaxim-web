@@ -1,44 +1,21 @@
 <script setup lang="ts">
-const menus = ref([
-  {
-    to: '/',
-    label: 'Home',
-  },
-  {
-    to: '/word',
-    label: 'Work',
-  },
-  {
-    to: '/chat',
-    label: 'chat',
-  },
-  {
-    to: '/chat/14',
-    label: 'chat to:14',
-  },
-]);
+
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-row items-stretch flex-1 h-full">
     <NuxtRouteAnnouncer>
       <template #default="{ message }">
         <p>{{ message }} was loaded.</p>
       </template>
     </NuxtRouteAnnouncer>
 
-    <NuxtLink to="/word">word</NuxtLink>
+    <Sider> </Sider>
 
-    <!-- <NuxtWelcome /> -->
-
-    <ul>
-      <li v-for="(item, index) in menus" :key="item.to">
-        <NuxtLink :to="item.to">{{ item.label }}</NuxtLink>
-      </li>
-    </ul>
-
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+    <div class="flex flex-col flex-1">
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
+    </div>
   </div>
 </template>

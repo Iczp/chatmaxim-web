@@ -7,7 +7,7 @@ const onClick = () => {
 
 <template>
   <div @click="onClick">
-    word
+    index
 
     {{ counter }}
   </div>

@@ -8,7 +8,11 @@
 
 @layer base {
   :root {
-    --header-height: 64px;
+    --sider-width: 64px;
+  }
+  #chatmaxim {
+    height: 100%;
+    width: 100%;
   }
   html::selection {
   }
@@ -19,8 +23,13 @@
     @apply caret-green-500;
   }
 
+  html,
   body {
-    @apply bg-gray-50 text-sm text-gray-900 leading-6 pb-16 sm:pb-0 pt-16;
+    height: 100%;
+  }
+
+  body {
+    @apply bg-gray-50 text-sm text-gray-900 leading-6 w-full h-full;
   }
 }
 
