@@ -31,10 +31,9 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
-    githubClientId: process.env.GITHUB_CLIENT_ID,
-    githubClientSecret: process.env.GITHUB_CLIENT_SECRET,
     public: {
-      githubClientId: process.env.GITHUB_CLIENT_ID,
+      ClientId: process.env.CLIENT_ID,
+      ClientSecret: process.env.CLIENT_SECRET,
     },
   },
   components: {
@@ -44,14 +43,9 @@ export default defineNuxtConfig({
      */
     // dirs: [],
     global: true,
-    dirs: ['~/components', ],
+    dirs: ['~/components'],
   },
-  modules: [
-    '@nuxt/icon',
-    '@nuxtjs/tailwindcss',
-    '@vueuse/nuxt',
-    '@pinia/nuxt',
-  ],
+  modules: ['@nuxt/icon', '@nuxtjs/tailwindcss', '@vueuse/nuxt', '@pinia/nuxt'],
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -68,5 +62,4 @@ export default defineNuxtConfig({
     config: {},
     viewer: { endpoint: '/_tailwind', exportViewer: true },
   },
-
 });
