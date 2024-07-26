@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   },
   app: {
     baseURL: '/',
-    rootId: 'file-preview',
+    rootId: 'chatmaxim',
     buildAssetsDir: 'static',
     head: {
       link: [
