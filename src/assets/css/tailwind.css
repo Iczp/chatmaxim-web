@@ -1,0 +1,28 @@
+/* assets/css/tailwind.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+}
+
+@layer base {
+  :root {
+    --header-height: 64px;
+  }
+  html::selection {
+  }
+  html::-moz-selection {
+    @apply bg-green-500;
+  }
+  input {
+    @apply caret-green-500;
+  }
+
+  body {
+    @apply bg-gray-50 text-sm text-gray-900 leading-6 pb-16 sm:pb-0 pt-16;
+  }
+}
+
+@layer utilities {
+}
