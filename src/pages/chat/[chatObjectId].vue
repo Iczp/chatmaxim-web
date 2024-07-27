@@ -50,7 +50,7 @@ onBeforeRouteUpdate(() => {
           <li
             v-for="(item, index) in 100"
             :key="index"
-            class="flex items-center p-4 cursor-default bg-slate-200 hover:bg-slate-300"
+            class="flex items-center h-16 p-4 cursor-default bg-slate-200 hover:bg-slate-300"
             :class="{ active: item == sessionUnitId }"
             @click="navTo(item)"
           >
@@ -59,7 +59,7 @@ onBeforeRouteUpdate(() => {
         </ul>
       </div>
     </div>
-    <div class="flex flex-col flex-1">
+    <div class="flex flex-col flex-1 border-l">
       <KeepAlive :max="10">
         <NuxtPage></NuxtPage>
       </KeepAlive>

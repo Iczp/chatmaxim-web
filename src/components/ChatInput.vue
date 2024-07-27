@@ -1,9 +1,35 @@
+<script setup lang="ts">
+const tools = ref([
+  {
+    icon: 'ic:baseline-face',
+    label: '表情',
+  },
+  {
+    icon: 'ic:baseline-face',
+    label: '表情',
+  },
+  {
+    icon: 'ic:baseline-face',
+    label: '表情',
+  },
+  {
+    icon: 'ic:baseline-face',
+    label: '表情',
+  },
+]);
+</script>
+
 <template>
-  <div class="flex flex-col h-48 border-t">
-    <div class="flex flex-row h-12">
-      <ul class="flex items-center">
-        <li v-for="i in 5" class="flex items-center justify-center size-6">
-          {{ i }}
+  <div class="flex flex-col h-56 border-t">
+    <div class="flex flex-row px-2 bg-gray-100">
+      <ul class="flex items-center gap-2">
+        <li
+          v-for="(item, index) in tools"
+          :key="index"
+          :title="item.label"
+          class="flex items-center justify-center size-8 hover:bg-gray-200"
+        >
+          <Icon :name="item.icon" class="text-xl" />
         </li>
       </ul>
     </div>
