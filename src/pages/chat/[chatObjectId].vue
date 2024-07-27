@@ -1,6 +1,12 @@
 <script lang="ts" setup>
 definePageMeta({
   layout: 'chating-layout',
+  key: (route) => {
+    const key = `/chat/${route.params.chatObjectId}`;
+    // console.log('keepAliveKey', key, route);
+    return key;
+  },
+  // keepAlive: true,
 });
 const sessionUnitItems = ref([]);
 
@@ -12,22 +18,37 @@ const sessionUnitId = computed(
 );
 
 const navTo = (sessionUnitId: string | number | undefined) => {
-  console.log('navto', chatObjectId, sessionUnitId);
+  // console.log('navto', chatObjectId, sessionUnitId);
 
   navigateTo(`/chat/${chatObjectId}/${sessionUnitId}`);
 };
+
+onActivated((e: any) => {
+  console.log('onActivated', chatObjectId, e);
+});
+
+onDeactivated(() => {
+  console.log('onDeactivated', chatObjectId);
+});
+
+onMounted(() => {
+  console.log('onMounted', chatObjectId);
+});
+onBeforeRouteUpdate(() => {
+  // console.log('onBeforeRouteUpdate', chatObjectId);
+});
 </script>
 
 <template>
   <div class="flex flex-row h-full">
     <div class="flex flex-col h-full bg-slate-200 w-72">
-      <header class="h-16">
+      <header class="flex h-16 shrink-0">
         <h3>IM Chat,id:{{ $route.params.chatObjectId }}</h3>
       </header>
-      <div>
+      <div class="overflow-x-auto scroll-m-2">
         <ul class="flex flex-col">
           <li
-            v-for="(item, index) in 20"
+            v-for="(item, index) in 100"
             :key="index"
             class="flex items-center p-4 cursor-default bg-slate-200 hover:bg-slate-300"
             :class="{ active: item == sessionUnitId }"
@@ -39,7 +60,9 @@ const navTo = (sessionUnitId: string | number | undefined) => {
       </div>
     </div>
     <div class="flex flex-col flex-1">
-      <NuxtPage></NuxtPage>
+      <KeepAlive :max="10">
+        <NuxtPage></NuxtPage>
+      </KeepAlive>
     </div>
   </div>
 </template>

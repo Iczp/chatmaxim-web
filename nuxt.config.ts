@@ -17,6 +17,9 @@ export default defineNuxtConfig({
     baseURL: '/',
     rootId: 'chatmaxim',
     buildAssetsDir: 'static',
+    keepalive: {
+      max: 100,
+    },
     head: {
       link: [
         {

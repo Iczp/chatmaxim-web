@@ -9,6 +9,7 @@
 @layer base {
   :root {
     --sider-width: 64px;
+    --chat-title-height: 64px;
   }
   #chatmaxim {
     height: 100%;

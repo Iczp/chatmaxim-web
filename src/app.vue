@@ -1,4 +1,7 @@
-<script setup lang="ts"></script>
+<script lang="ts" setup>
+
+
+</script>
 
 <template>
   <div class="w-full h-full">
@@ -9,7 +12,9 @@
     </NuxtRouteAnnouncer>
 
     <NuxtLayout>
-      <NuxtPage />
+      <KeepAlive>
+        <NuxtPage />
+      </KeepAlive>
     </NuxtLayout>
   </div>
 </template>

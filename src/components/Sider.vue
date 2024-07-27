@@ -6,11 +6,11 @@ const menus = ref([
   },
 
   {
-    to: '/chat/13',
+    to: '/chat/13/25',
     label: 'chat-13',
   },
   {
-    to: '/chat/14',
+    to: '/chat/14/80',
     label: 'chat-14',
   },
   {
