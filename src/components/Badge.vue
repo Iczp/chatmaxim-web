@@ -15,7 +15,7 @@ withDefaults(
 
 <template>
   <div
-    class="flex items-center justify-center text-sm text-white bg-red-600 border rounded-full bg-opacity-80 border-opacity-80"
+    class="flex items-center justify-center text-white bg-red-500 border rounded-full text-md bg-opacity-80 border-opacity-80"
     :class="{ sup: true, dot, badge: !dot }"
   >
     <slot v-if="!dot">{{ Number(count) > max ? `${max}+` : count }}</slot>
@@ -30,6 +30,6 @@ withDefaults(
   @apply size-2 shadow-md shadow-red-500;
 }
 .badge {
-  @apply min-w-5;
+  @apply min-w-5 px-1;
 }
 </style>

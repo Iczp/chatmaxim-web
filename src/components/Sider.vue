@@ -16,7 +16,7 @@ const menus = ref([
     label: 'chat-14',
     icon: 'ic:round-chat',
     chatObjectId: '14',
-    badge: 6,
+    badge: 696,
   },
   {
     to: '/login',
