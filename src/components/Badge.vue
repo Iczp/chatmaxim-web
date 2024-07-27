@@ -2,7 +2,7 @@
 withDefaults(
   defineProps<{
     count?: number | string;
-    max: number;
+    max?: number;
     sup?: boolean;
     dot?: boolean;
   }>(),

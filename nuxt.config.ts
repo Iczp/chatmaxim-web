@@ -48,7 +48,13 @@ export default defineNuxtConfig({
     global: true,
     dirs: ['~/components'],
   },
-  modules: ['@nuxt/icon', '@nuxtjs/tailwindcss', '@vueuse/nuxt', '@pinia/nuxt'],
+  modules: [
+    '@nuxt/icon',
+    '@nuxtjs/tailwindcss',
+    '@vueuse/nuxt',
+    '@pinia/nuxt',
+    '@ant-design-vue/nuxt',
+  ],
   postcss: {
     plugins: {
       tailwindcss: {},

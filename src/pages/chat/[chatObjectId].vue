@@ -43,7 +43,13 @@ onBeforeRouteUpdate(() => {
   <div class="flex flex-row h-full">
     <div class="flex flex-col h-full bg-slate-200 w-72">
       <header class="flex h-16 shrink-0">
-        <h3>IM Chat,id:{{ $route.params.chatObjectId }}</h3>
+        <h3 class="p-4">IM Chat,id:{{ $route.params.chatObjectId }}
+
+
+          <a-badge :count="6">555</a-badge>
+        </h3>
+
+        
       </header>
       <div class="overflow-x-auto scroll-m-2">
         <ul class="flex flex-col">
