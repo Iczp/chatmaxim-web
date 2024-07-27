@@ -1,15 +1,15 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div class="w-full h-full">
+  <div class="flex flex-row items-stretch flex-1 h-full">
     <NuxtRouteAnnouncer>
       <template #default="{ message }">
         <p>{{ message }} was loaded.</p>
       </template>
     </NuxtRouteAnnouncer>
 
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+    <Sider> </Sider>
+
+    <div class="flex flex-col flex-1">
+      <slot></slot>
+    </div>
   </div>
 </template>

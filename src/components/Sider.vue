@@ -13,6 +13,10 @@ const menus = ref([
     to: '/chat/14',
     label: 'chat-14',
   },
+  {
+    to: '/login',
+    label: 'login',
+  },
 ]);
 
 const footerMenus = ref([

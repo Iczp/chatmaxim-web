@@ -1,14 +1,17 @@
 <script lang="ts" setup>
+definePageMeta({
+  layout: 'chating-layout',
+});
 const sessionUnitItems = ref([]);
 
 const route = useRoute();
 const chatObjectId = route.params.chatObjectId as number | string | undefined;
 
-const sessionUnitId = computed<number | string | undefined>(
-  () => route.params.sessionUnitId
+const sessionUnitId = computed(
+  () => route.params.sessionUnitId as number | string | undefined
 );
 
-const navTo = (sessionUnitId: string) => {
+const navTo = (sessionUnitId: string | number | undefined) => {
   console.log('navto', chatObjectId, sessionUnitId);
 
   navigateTo(`/chat/${chatObjectId}/${sessionUnitId}`);
