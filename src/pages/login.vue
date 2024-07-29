@@ -8,7 +8,7 @@ import { UserOutlined, LockOutlined, SettingOutlined } from '@ant-design/icons-v
 import type { TokenDto } from '../apis/auth/dto';
 // import { setAuthorize } from '../ipc/setAuthorize';
 // import { useAppInfo } from '../commons/useAppInfo';
-// import { useI18n } from 'vue-i18n';
+import { useI18n } from 'vue-i18n';
 // import { openAppSettings } from '../ipc/openAppSettings';
 
 const { t, d, n, locale, availableLocales } = useI18n();
@@ -40,7 +40,7 @@ const onFinish = (values: any) => {
       message.success({ content: `${t('Welcome back')}!`, key, duration: 2 });
       // setWindow({ size: { width: 1080, height: 760 } });
       // setAuthorize(res.detail as TokenDto);
-      router.push('/');
+      // router.push('/');
     })
     .catch(err => {
       message.error({ content: err.message, key, duration: 2 });
@@ -51,7 +51,7 @@ const onFinishFailed = (errorInfo: any) => {
   console.log('Failed:', errorInfo);
 };
 
-const { appId, appName, author, websize, version, copyright } = useAppInfo();
+// const { appId, appName, author, websize, version, copyright } = useAppInfo();
 </script>
 
 <template>
