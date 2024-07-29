@@ -26,6 +26,10 @@ export default defineNuxtConfig({
           rel: 'stylesheet',
           href: '/css/scroller.css', // 引用生成的静态样式文件
         },
+        {
+          rel: 'stylesheet',
+          href: '/css/antd.css', // 引用生成的静态样式文件
+        },
       ],
       script: [
         // 百度统计

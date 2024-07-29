@@ -16,7 +16,11 @@ const menus = ref([
     label: 'chat-14',
     icon: 'ic:round-chat',
     chatObjectId: '14',
-    badge: 696,
+    badge: 66,
+    click: (item: any) => {
+      item.badge = (Number(item.badge) || 0) + 1;
+      navigateTo(item.to);
+    },
   },
   {
     to: '/login',
@@ -28,6 +32,9 @@ const menus = ref([
     label: 'icon',
     target: '_blank',
     icon: 'ic:baseline-face',
+    click: (item: any) => {
+      return false;
+    },
   },
 ]);
 
@@ -44,79 +51,24 @@ const footerMenus = ref([
     icon: 'ic:baseline-settings',
   },
 ]);
+
+const onItemClick = (item: any) => {
+  console.log('onItemClick', item);
+  item.click && item.click(item);
+};
 </script>
 
 <template>
   <div
-    class="flex flex-col bg-gray-900 w-[--sider-width] justify-between text-gray-100 py-4"
+    class="aside flex flex-col bg-gray-900 w-[--sider-width] justify-between text-gray-100 py-4"
   >
     <header>
-      <!-- <h3>header</h3> -->
-      <ul class="flex flex-col items-center justify-center">
-        <li
-          v-for="(item, index) in menus"
-          :key="item.to"
-          class="flex items-center justify-center size-16"
-          :class="{
-            active: item.chatObjectId == $route.params.chatObjectId,
-            divider: index === 0,
-          }"
-        >
-          <NuxtLink
-            :to="item.to"
-            :target="item.target"
-            class="relative flex items-center justify-center rounded-lg size-10 hover:bg-gray-600"
-            :title="item.label"
-          >
-            <Badge
-              v-if="item.badge || index == 1"
-              :count="item.badge"
-              :dot="index == 1"
-            />
-            <Icon v-if="item.icon" :name="item.icon" class="text-2xl" />
-            <!-- {{ item.label }} -->
-          </NuxtLink>
-        </li>
-      </ul>
+      <SideList :items="menus" @item-click="onItemClick"></SideList>
     </header>
 
     <footer>
-      <!-- <h3>footer</h3> -->
-
-      <ul class="flex flex-col items-center justify-center gap-4">
-        <li
-          v-for="(item, index) in footerMenus"
-          :key="item.to"
-          class="relative flex items-center justify-center"
-        >
-          <NuxtLink
-            :to="item.to"
-            :target="item.target"
-            class="flex items-center justify-center rounded-lg size-10 hover:bg-gray-600"
-            :title="item.label"
-          >
-            <Icon v-if="item.icon" :name="item.icon" class="text-2xl" />
-            <!-- {{ item.label }} -->
-          </NuxtLink>
-        </li>
-      </ul>
+      <SideList :items="footerMenus" @item-click="onItemClick"></SideList>
     </footer>
   </div>
 </template>
-<style scoped>
-.divider {
-  /* @apply after:bg-gray-800 after:w-full flex-col flex  after:content-[''] after:h-[1px] after:size-4 ; */
-}
-/* .divider::after {
-  display: flex;
-  content: '';
-  height: 1px;
-  width: 80%;
-} */
-.active {
-  @apply bg-gray-800;
-}
-.active a {
-  @apply bg-sky-600;
-}
-</style>
+<style lang="scss" scoped></style>
