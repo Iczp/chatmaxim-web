@@ -58,6 +58,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@pinia/nuxt',
     '@ant-design-vue/nuxt',
+    // '@nuxtjs/i18n',
   ],
   postcss: {
     plugins: {
