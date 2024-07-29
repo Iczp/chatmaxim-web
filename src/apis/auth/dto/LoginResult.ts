@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { TokenDto } from "./TokenDto";
+import type { TokenDto } from "./TokenDto";
 import { ApiError } from "../../core/ApiError";
 
 export type LoginResult = {

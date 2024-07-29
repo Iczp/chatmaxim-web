@@ -1,6 +1,6 @@
 import { ChatObjectTypeEnums } from '../enums';
-import { ChatObjectDto } from './ChatObjectDto';
-import { SessionUnitSettingDto } from './SessionUnitSettingDto';
+import type { ChatObjectDto } from './ChatObjectDto';
+import type { SessionUnitSettingDto } from './SessionUnitSettingDto';
 
 export type SessionUnitDestinationDto = {
   /**

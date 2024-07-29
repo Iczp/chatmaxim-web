@@ -1,6 +1,6 @@
-import { ChatObjectDto } from './ChatObjectDto';
+import type { ChatObjectDto } from './ChatObjectDto';
 import type { EntryDto } from './EntryDto';
-import { SessionUnitSenderDto } from './SessionUnitSenderDto';
+import type { SessionUnitSenderDto } from './SessionUnitSenderDto';
 
 export type SessionUnitDetailDto = SessionUnitSenderDto & {
   id?: string;

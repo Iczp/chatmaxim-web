@@ -1,5 +1,5 @@
 import { GrantTypeEnum } from './GrantTypeEnum';
-import { TokenInputBase } from './TokenInputBase';
+import type { TokenInputBase } from './TokenInputBase';
 
 export type RefreshTokenInput = TokenInputBase & {
   /**

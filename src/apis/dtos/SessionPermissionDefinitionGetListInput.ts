@@ -1,4 +1,4 @@
-import { GetListInput } from './GetListInput';
+import  type { GetListInput } from './GetListInput';
 
 export type SessionPermissionDefinitionGetListInput = GetListInput & {
   /**

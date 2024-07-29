@@ -1,6 +1,6 @@
 import { MessageStateEnums } from '../enums';
-import { ChatObjectDto } from './ChatObjectDto';
-import { MessageOwnerDto } from './MessageOwnerDto';
+import type { ChatObjectDto } from './ChatObjectDto';
+import type { MessageOwnerDto } from './MessageOwnerDto';
 
 export type MessageDto = MessageOwnerDto & {
   /**

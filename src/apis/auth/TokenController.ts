@@ -1,11 +1,11 @@
 // import { CancelablePromise } from '../core/CancelablePromise';
 
 import { TokenService } from './TokenService';
-import { TokenDto, LoginResult, LoginInput } from './dto';
+import type { TokenDto, LoginResult, LoginInput } from './dto';
 import { GrantTypeEnum } from './dto/GrantTypeEnum';
 import { env } from '../../env';
-import { setAuthorize } from '../../ipc/setAuthorize';
-import { promises } from 'original-fs';
+
+
 
 export const TOKEN_KEY: string = env.token_key;
 
@@ -80,7 +80,7 @@ export const handleToken = async (token: TokenDto, caller?: string): Promise<Tok
   console.log(`handleToken[${caller}]`, token);
   setStorageToken(JSON.stringify(token));
 
-  await setAuthorize(token);
+  // await setAuthorize(token);
 
   return token;
 };

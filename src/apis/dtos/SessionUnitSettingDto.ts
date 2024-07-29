@@ -1,4 +1,4 @@
-import { SessionUnitSettingSimpleDto } from './SessionUnitSettingSimpleDto';
+import type { SessionUnitSettingSimpleDto } from './SessionUnitSettingSimpleDto';
 
 export type SessionUnitSettingDto = SessionUnitSettingSimpleDto & {
   /**

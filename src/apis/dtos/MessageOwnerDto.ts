@@ -1,5 +1,5 @@
-import { MessageSimpleDto } from './MessageSimpleDto';
-import { SessionUnitSenderDto } from './SessionUnitSenderDto';
+import type { MessageSimpleDto } from './MessageSimpleDto';
+import type { SessionUnitSenderDto } from './SessionUnitSenderDto';
 
 export type MessageOwnerDto = MessageSimpleDto & {
   /**

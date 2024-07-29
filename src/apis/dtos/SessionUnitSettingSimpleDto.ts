@@ -1,4 +1,4 @@
-import { JoinWayEnums } from "../enums";
+import type { JoinWayEnums } from "../enums";
 
 export type SessionUnitSettingSimpleDto = {
     /**

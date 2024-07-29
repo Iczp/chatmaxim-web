@@ -1,4 +1,4 @@
-import { TokenInputBase } from './TokenInputBase';
+import  type { TokenInputBase } from './TokenInputBase';
 
 export type TokenCreateInput = TokenInputBase & {
   /**

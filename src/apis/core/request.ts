@@ -19,9 +19,8 @@ import { CancelablePromise } from './CancelablePromise';
 import type { OnCancel } from './CancelablePromise';
 import type { OpenAPIConfig } from './OpenAPI';
 import { getToken, isTokenUrl, refreshToken } from '../auth/TokenController';
-import { useWindowStore } from '../../stores/windowStore';
-import { version } from '../../../package.json';
-import log from 'video.js/dist/types/utils/log';
+// import { useWindowStore } from '../../stores/windowStore';
+
 
 let tokenCount: number = 0;
 const getTokenValue = () => {
@@ -231,10 +230,10 @@ export const getHeaders = async (
   const additionalHeaders = await resolve(options, config.HEADERS);
   const formHeaders = (typeof formData?.getHeaders === 'function' && formData?.getHeaders()) || {};
 
-  const windowStore = useWindowStore();
+  // const windowStore = useWindowStore();
 
   const headers = Object.entries({
-    'app-device-id': windowStore.machineId,
+    // 'app-device-id': windowStore.machineId,
     // 'app-electron': process.electron,
     // Accept: 'application/json',
     ...additionalHeaders,

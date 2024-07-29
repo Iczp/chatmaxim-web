@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 
-import { AxiosProgressEvent, AxiosRequestConfig, ResponseType } from 'axios';
+import type { AxiosProgressEvent, AxiosRequestConfig, ResponseType } from 'axios';
 
 export interface ApiRequestConfig extends AxiosRequestConfig {}
 

@@ -1,5 +1,5 @@
 
-import { ChatObjectDto } from '.';
+import  type { ChatObjectDto } from '.';
 
 export type SessionRequestDetailDto = {
     id?: string;

@@ -1,8 +1,8 @@
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-import { TokenDto, TokenCreateInput, RefreshTokenInput } from './dto';
-import { toQueryString } from '../../commons/utils';
+import type { TokenDto, TokenCreateInput, RefreshTokenInput } from './dto';
+// import { toQueryString } from '../../commons/utils';
 import { TOKEN_URL } from './TokenController';
 
 export class TokenService {
@@ -19,7 +19,7 @@ export class TokenService {
       method: 'POST',
       url: TOKEN_URL,
       mediaType: 'application/x-www-form-urlencoded',
-      body: toQueryString(input),
+      // body: toQueryString(input),
     });
   }
 
@@ -36,7 +36,7 @@ export class TokenService {
       method: 'POST',
       url: TOKEN_URL,
       mediaType: 'application/x-www-form-urlencoded',
-      body: toQueryString(input),
+      // body: toQueryString(input),
     });
   }
 }

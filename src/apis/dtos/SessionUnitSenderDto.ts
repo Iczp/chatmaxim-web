@@ -1,5 +1,5 @@
-import { SessionUnitDestinationDto } from './SessionUnitDestinationDto';
-import { SessionUnitSettingDto } from './SessionUnitSettingDto';
+import type { SessionUnitDestinationDto } from './SessionUnitDestinationDto';
+import type { SessionUnitSettingDto } from './SessionUnitSettingDto';
 
 export type SessionUnitSenderDto = SessionUnitDestinationDto & {
 
