@@ -12,4 +12,11 @@ export type LoginInput = {
    * @type {string}
    */
   password?: string;
+
+  /**
+   * authorization_code
+   *
+   * @type {string}
+   */
+  code?: string;
 };

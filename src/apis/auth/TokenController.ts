@@ -4,8 +4,7 @@ import { TokenService } from './TokenService';
 import type { TokenDto, LoginResult, LoginInput } from './dto';
 import { GrantTypeEnum } from './dto/GrantTypeEnum';
 import { env } from '../../env';
-
-
+import type { TokenCodeInput } from './dto/TokenCodeInput';
 
 export const TOKEN_KEY: string = env.token_key;
 
@@ -38,7 +37,10 @@ export const isLogined = (): boolean => postToken() != null;
  * @return {*}  {Promise<LoginResult>}
  */
 
-export const login = ({ username, password }: LoginInput): Promise<LoginResult> => {
+export const login = ({
+  username,
+  password,
+}: LoginInput): Promise<LoginResult> => {
   return new Promise((resolve, reject) => {
     TokenService.fetchToken({
       client_id: env.client_id,
@@ -48,7 +50,7 @@ export const login = ({ username, password }: LoginInput): Promise<LoginResult> 
       password,
       scope: 'IM offline_access roles profile phone email address',
     })
-      .then(async token => {
+      .then(async (token) => {
         token = await handleToken(token, 'fetchToken');
         resolve({
           message: '登录成功',
@@ -56,7 +58,47 @@ export const login = ({ username, password }: LoginInput): Promise<LoginResult> 
           detail: token,
         });
       })
-      .catch(err => {
+      .catch((err) => {
+        let message = err?.body?.error_description || err.message;
+        console.error('err:', err, JSON.stringify(err));
+        reject({
+          message: '登录失败:' + message,
+          success: false,
+          detail: err,
+        });
+      });
+  });
+};
+
+/**
+ * 登录
+ *
+ * @param {LoginInput} { username, password }
+ * @return {*}  {Promise<LoginResult>}
+ */
+
+export const loginByCode = ({
+  code,
+}: {
+  code: string;
+}): Promise<LoginResult> => {
+  return new Promise((resolve, reject) => {
+    TokenService.fetchTokenByCode({
+      client_id: env.client_id,
+      client_secret: env.client_secret,
+      grant_type: GrantTypeEnum.authorization_code,
+      code,
+      redirect_uri: env.redirect_uri,
+    })
+      .then(async (token) => {
+        token = await handleToken(token, 'fetchTokenByCode');
+        resolve({
+          message: '登录成功',
+          success: true,
+          detail: token,
+        });
+      })
+      .catch((err) => {
         let message = err?.body?.error_description || err.message;
         console.error('err:', err, JSON.stringify(err));
         reject({
@@ -74,7 +116,10 @@ export const login = ({ username, password }: LoginInput): Promise<LoginResult> 
  * @param {TokenDto} token
  * @return {*}  {TokenDto}
  */
-export const handleToken = async (token: TokenDto, caller?: string): Promise<TokenDto> => {
+export const handleToken = async (
+  token: TokenDto,
+  caller?: string
+): Promise<TokenDto> => {
   token.creation_time = new Date();
   cacheToken = token;
   console.log(`handleToken[${caller}]`, token);
@@ -112,7 +157,6 @@ export const refreshToken = async (token: TokenDto): Promise<TokenDto> => {
 
 export const getToken = (tryCount: number = 10): Promise<TokenDto | null> => {
   return new Promise(async (resolve, reject) => {
-
     // console.log('getToken', tryCount);
     if (isPostToken) {
       // console.log('isPostToken', isPostToken, tryCount);
@@ -215,8 +259,6 @@ export const getLocalToken = (): TokenDto | null => {
       cacheToken = token;
     }
   }
-
-  
 
   return token;
 };

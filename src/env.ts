@@ -46,6 +46,13 @@ export type EnvType = {
    * @type {(string | undefined)}
    */
   client_secret: string | undefined;
+
+  /**
+   *
+   *
+   * @type {(string)}
+   */
+  redirect_uri: string ;
   /**
    *
    *
@@ -85,7 +92,14 @@ export type EnvType = {
    * default color-scheme
    * @type {(string | 'auto' | 'system' | 'light' | 'dark' | 'green' | 'blue')}
    */
-  defaultColorScheme: string | 'auto' | 'system' | 'light' | 'dark' | 'green' | 'blue';
+  defaultColorScheme:
+    | string
+    | 'auto'
+    | 'system'
+    | 'light'
+    | 'dark'
+    | 'green'
+    | 'blue';
 
   /**
    * default language
@@ -102,12 +116,12 @@ export type EnvType = {
    * default Screenshots shortcuts:
    * @type {(string | 'zh-CN' | 'en-US')}
    */
-  defaultScreenshotsShortcuts:  string | 'CommandOrControl+#' | 'CTRL+Alt+E';
+  defaultScreenshotsShortcuts: string | 'CommandOrControl+#' | 'CTRL+Alt+E';
 };
 
 export const env: EnvType = {
   isDev: !import.meta.env.PROD,
-  
+
   app_id: import.meta.env.VITE_APP_ID,
 
   app_name: import.meta.env.VITE_APP_NAME,
@@ -119,6 +133,8 @@ export const env: EnvType = {
   client_id: import.meta.env.VITE_APP_CLIENT_ID,
 
   client_secret: import.meta.env.VITE_APP_CLIENT_SECRET,
+
+  redirect_uri: import.meta.env.VITE_APP_REDIRECT_URI,
 
   base_url: import.meta.env.VITE_APP_BASEURL,
 
@@ -134,8 +150,9 @@ export const env: EnvType = {
 
   defaultLanguage: import.meta.env.VITE_APP_DEFAULT_LANGUAGE,
 
-  defaultfetchMessageShortcuts: import.meta.env.VITE_APP_DEFAULT_FETCH_MESSAGE_SHORTCUTS,
+  defaultfetchMessageShortcuts: import.meta.env
+    .VITE_APP_DEFAULT_FETCH_MESSAGE_SHORTCUTS,
 
-  defaultScreenshotsShortcuts: import.meta.env.VITE_APP_DEFAULT_FETCH_MESSAGE_SHORTCUTS,
-
+  defaultScreenshotsShortcuts: import.meta.env
+    .VITE_APP_DEFAULT_FETCH_MESSAGE_SHORTCUTS,
 };

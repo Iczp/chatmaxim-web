@@ -23,5 +23,5 @@ export type TokenCreateInput = TokenInputBase & {
    * @type {(string| null | undefined)}
    * @memberof TokenCreateInput
    */
-  scope: string | null | undefined | 'IM offline_access roles profile phone email address';
+  scope?: string | null | undefined | 'IM offline_access roles profile phone email address';
 };

@@ -20,5 +20,10 @@ export type TokenInputBase = {
    * @type {string}
    * @memberof TokenInputBase
    */
-  readonly grant_type: string | 'password' | 'refresh_token';
+  readonly grant_type:
+    | string
+    | 'password'
+    | 'refresh_token'
+    | 'client_credentials'
+    | 'authorization_code';
 };

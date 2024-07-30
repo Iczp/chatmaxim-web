@@ -58,7 +58,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@pinia/nuxt',
     '@ant-design-vue/nuxt',
-    // '@nuxtjs/i18n',
+    '@nuxtjs/i18n',
   ],
   postcss: {
     plugins: {
@@ -76,4 +76,7 @@ export default defineNuxtConfig({
     config: {},
     viewer: { endpoint: '/_tailwind', exportViewer: true },
   },
+  i18n: {
+    vueI18n: './i18n.config.ts' // if you are using custom path, default
+  }
 });
