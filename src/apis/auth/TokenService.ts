@@ -2,7 +2,7 @@ import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 import type { TokenDto, TokenCreateInput, RefreshTokenInput } from './dto';
-import { toQueryString } from '../../utils/toQueryString';
+import { toQueryString } from '../../utils/utils';
 import { TOKEN_URL } from './TokenController';
 import type { TokenCodeInput } from './dto/TokenCodeInput';
 
