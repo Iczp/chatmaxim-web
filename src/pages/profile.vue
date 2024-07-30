@@ -17,12 +17,12 @@ const onClick = () => {
 
 <template>
   <div @click="onClick">
-    index
+    profile
     <h3 class="text-lg">
       <NuxtLink to="/chat/13/16">
         <Icon name="mdi:abjad-arabic"></Icon>
 
-        Chating</NuxtLink
+        profile</NuxtLink
       >
     </h3>
 

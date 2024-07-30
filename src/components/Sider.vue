@@ -1,4 +1,15 @@
 <script setup lang="ts">
+
+import { useWebSocketKit } from '../apis/websockets/useWebSocketKit';
+
+const { badge, badgeItems, refresh } = useBadges();
+
+useWebSocketKit({
+  onConnected(ws) {
+    refresh();
+  },
+});
+
 const menus = ref([
   {
     to: '/',
@@ -43,6 +54,7 @@ const footerMenus = ref([
     to: '/profile',
     label: 'profile',
     icon: 'ic:sharp-person',
+    dot: true,
   },
   {
     to: '/_tailwind/',
@@ -51,6 +63,8 @@ const footerMenus = ref([
     icon: 'ic:baseline-settings',
   },
 ]);
+
+const activeId = ref<string | undefined>();
 
 const onItemClick = (item: any) => {
   console.log('onItemClick', item);

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import { login, isLogined } from '../../apis/auth/TokenController';
+import { login, isLogined, getAuthUrl } from '../../apis/auth/TokenController';
 // import { router } from '../routes';
 
 import { message } from 'ant-design-vue';
@@ -12,7 +12,7 @@ import {
 import type { TokenDto } from '../../apis/auth/dto';
 // import { setAuthorize } from '../ipc/setAuthorize';
 // import { useAppInfo } from '../commons/useAppInfo';
-import { useI18n } from 'vue-i18n';
+// import { useI18n } from 'vue-i18n';
 // import { openAppSettings } from '../ipc/openAppSettings';
 
 const { t, d, n, locale, availableLocales } = useI18n();
@@ -21,17 +21,9 @@ availableLocales.forEach((locale: any) => {
 });
 const key = 'updatable';
 
-interface FormState {
-  username: string;
-  password: string;
-  isAutoLogin: boolean;
-}
+interface FormState {}
 
-const formState = reactive<FormState>({
-  username: 'admin',
-  password: '1q2w3E*',
-  isAutoLogin: true,
-});
+const formState = reactive<FormState>({});
 
 const openLoginPopup = (url: string) => {
   const width = 600,
@@ -44,20 +36,9 @@ const openLoginPopup = (url: string) => {
 };
 
 const authLogin = () => {
-  console.log('login');
-  const clientId = 'Nuxt3_Web';
-  const clientSecret = '1q2w3e*';
-  const authHost = 'http://10.0.5.20:8043';
-  //   const callbackUri = 'https://localhost:44344/swagger/oauth2-redirect.html';
-  const callbackUri = 'http://im.iczp.net:3333/login/callback';
-  const redirectUri = encodeURIComponent(callbackUri);
-  const responseType = 'code';
-  const scope = encodeURIComponent('address email phone profile roles IM');
-
-  const authUrl = `${authHost}/connect/authorize?client_id=${clientId}&client_secret=${clientSecret}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
+  const authUrl = getAuthUrl();
   // window.location.href = authUrl;
   openLoginPopup(authUrl);
-
   //   https://localhost:44344/swagger/oauth2-redirect.html?code=WuYXfuTm6VdlLKgYLE4lc-6aFUHMt9GlF_6eagd3dtk&iss=http%3A%2F%2F10.0.5.20%3A8043%2F
 };
 
@@ -70,6 +51,19 @@ const onFinish = (values: any) => {
 const onFinishFailed = (errorInfo: any) => {
   console.log('Failed:', errorInfo);
 };
+
+onMounted(() => {
+  console.log('onMounted');
+  window.addEventListener('message', (event) => {
+    const { status, token, error } = event.data;
+    console.log('event', event, event.data);
+    if (status === 'login-success') {
+      // 处理登录成功
+      console.info('登录成功');
+      navigateTo('/');
+    }
+  });
+});
 
 // const { appId, appName, author, websize, version, copyright } = useAppInfo();
 </script>

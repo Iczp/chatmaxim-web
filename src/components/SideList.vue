@@ -1,8 +1,9 @@
 <script setup lang="ts">
 const props = defineProps<{
   items: any[];
-  badge?: number | string;
-  dot?: boolean;
+  // badge?: number | string;
+  // dot?: boolean;
+  active?: boolean;
 }>();
 
 const emit = defineEmits(['item-click']);
@@ -22,7 +23,7 @@ const onItemClick = (item: any) => {
         divider: index === 0,
       }"
     >
-      <a-badge :count="item.badge" :dot="index == 1">
+      <a-badge :count="item.badge" :dot="item.dot">
         <NuxtLink
           :to="item.to"
           :target="item.target"
@@ -39,7 +40,6 @@ const onItemClick = (item: any) => {
 </template>
 
 <style lang="scss" scoped>
-
 .active {
   @apply bg-gray-800;
 }

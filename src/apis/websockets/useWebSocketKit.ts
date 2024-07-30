@@ -1,13 +1,13 @@
-import { ipcRenderer } from 'electron';
+// import { ipcRenderer } from 'electron';
 import { useWebsocketStore } from '../../stores/websocketStore';
 import { ConnectionState, ConnectionStateText } from './ConnectionState';
-import { ReceivedDto } from './ReceivedDto';
+import type { ReceivedDto } from './ReceivedDto';
 import { useWebSocketCore } from './useWebSocketCore';
 import { TicketService } from './TicketService';
 import { ref } from 'vue';
-import { eventBus } from '../../commons/eventBus';
+// import { eventBus } from '../../commons/eventBus';
 import { useWebsocketUi } from './useWebsocketUi';
-import { globalEvent } from '../../global-events';
+// import { globalEvent } from '../../global-events';
 
 export let connectionState: ConnectionState = ConnectionState.None;
 export type NetDelay = {
@@ -101,29 +101,29 @@ export const useWebSocketKit = ({
         console.log(`useWebSocketKit WebSocket Received:`, e.data);
         const data = JSON.parse(e.data) as ReceivedDto<any>;
         // emit self window
-        ipcRenderer.emit('websocket', {}, { payload: e.data });
+        // ipcRenderer.emit('websocket', {}, { payload: e.data });
         // sent to remote window
-        ipcRenderer.invoke('websocket', e.data);
-        globalEvent.invoke('websocket@message', e.data);
+        // ipcRenderer.invoke('websocket', e.data);
+        // globalEvent.invoke('websocket@message', e.data);
       } catch (error) {
         console.error(`data:${error}`);
       }
     },
     onConnected: (ws: WebSocket) => {
-      globalEvent.invoke('websocket@connected');
+      // globalEvent.invoke('websocket@connected');
       console.log('useWebSocketKit onConnected', ws);
       setState(ConnectionState.Ok);
-      eventBus.emit('connected');
+      // eventBus.emit('connected');
       onConnected?.(ws);
     },
     onDisconnected: (ws: WebSocket, event: CloseEvent) => {
-      globalEvent.invoke('websocket@disconnected');
+      // globalEvent.invoke('websocket@disconnected');
       console.log('useWebSocketKit onDisconnected', ws, event);
       setState(ConnectionState.Close);
-      eventBus.emit('disconnected');
+      // eventBus.emit('disconnected');
     },
     onError: (ws: WebSocket, event: Event) => {
-      globalEvent.invoke('websocket@error');
+      // globalEvent.invoke('websocket@error');
       console.log('onError', ws, event);
     },
   });

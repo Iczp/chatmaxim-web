@@ -110,6 +110,26 @@ export const loginByCode = ({
   });
 };
 
+export const getAuthUrl = (args?: { scope: string }) => {
+  const { scope } = args || {
+    scope: 'address email phone profile roles IM',
+  };
+
+  const queryParams: Record<string, string> = {
+    client_id: env.client_id,
+    redirect_uri: env.redirect_uri,
+    response_type: 'code',
+    scope,
+  };
+  if (env.client_secret) {
+    queryParams.client_secret = env.client_secret;
+  }
+  const queryString = new URLSearchParams(queryParams).toString();
+  const authUrl = `${env.auth_host}/connect/authorize?${queryString}`;
+  console.log('getAuthUrl', authUrl);
+  return authUrl;
+};
+
 /**
  *
  *
