@@ -117,45 +117,7 @@ export const formatDurations = (duration: number): string => {
   return 'mm:ss';
   // return moment(duration).format('mm:ss');
 };
-/**
- *
- *
- * @param {{
- *   chatObjectId: number;
- *   sessionUnitId?: string;
- *   title?: string;
- * }} {
- *   chatObjectId,
- *   sessionUnitId,
- *   title,
- * }
- */
 
-export const navToChat = ({
-  chatObjectId,
-  sessionUnitId,
-  title,
-}: {
-  chatObjectId: number;
-  sessionUnitId?: string;
-  title?: string;
-}) => {
-  // const windowStore = useWindowStore();
-  // if (!windowStore.isMain()) {
-  //   message.error({ content: '独立窗口未实现', duration: 2 });
-  //   return;
-  // }
-  // router.push({
-  //   name: 'chat',
-  //   params: {
-  //     chatObjectId,
-  //     sessionUnitId,
-  //   },
-  //   query: {
-  //     title,
-  //   },
-  // });
-};
 
 export const getSenderNameForMessage = (
   entity?: MessageDto

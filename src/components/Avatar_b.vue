@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { UserOutlined } from '@ant-design/icons-vue';
-import { type ChatObjectDto } from '../apis/dtos';
+import type { ChatObjectDto } from '../apis/dtos';
 // import { Person, Group, Groups, SmartToy, Services, ShoppingBag } from '../icons';
-import { type CSSProperties, computed, ref } from 'vue';
+import { computed, ref, type CSSProperties } from 'vue';
 import { ChatObjectTypeEnums, ServiceStatusEnums } from '../apis/enums';
 import { formatUrl } from '../utils/utils';
-import ServiceStatus from '../components/ServiceStatus.vue';
+import ServiceStatus from './ServiceStatus.vue';
 
 import { useCssVar } from '@vueuse/core';
 const props = withDefaults(
@@ -49,41 +49,31 @@ const src = computed(() =>
 </script>
 
 <template>
-  <div ref="avatarRef" class="avatar-wraper" :style="wrapperStyle">
-    <a-avatar
-      :src="src"
-      :shape="shape"
-      :size="size"
-      class="avatar"
-      :alt="name"
-      :object-type="objectType"
-    >
-      <template #icon>
-        <div class="text-2xl avatar-icon">
-          <Icon
-            v-if="objectType == ChatObjectTypeEnums.Room"
-            name="material-symbols:group"
-          />
-          <Icon
-            v-else-if="objectType == ChatObjectTypeEnums.Square"
-            name="material-symbols:groups"
-          />
-          <Icon
-            v-else-if="objectType == ChatObjectTypeEnums.Robot"
-            name="material-symbols:robot"
-          />
-          <Icon
-            v-else-if="objectType == ChatObjectTypeEnums.Official"
-            name="ri:service-fill"
-          />
-          <Icon
-            v-else-if="objectType == ChatObjectTypeEnums.ShopKeeper"
-            name="material-symbols:shopping-bag"
-          />
-          <Icon v-else name="material-symbols:person" />
-        </div>
-      </template>
-    </a-avatar>
+  <div ref="avatarRef" class="rounded-lg hover:bg-gray-600 avatar-wraper size-9">
+    <div class="flex-1 text-2xl flex-center avatar-icon">
+      <Icon
+        v-if="objectType == ChatObjectTypeEnums.Room"
+        name="material-symbols:group"
+      />
+      <Icon
+        v-else-if="objectType == ChatObjectTypeEnums.Square"
+        name="material-symbols:groups"
+      />
+      <Icon
+        v-else-if="objectType == ChatObjectTypeEnums.Robot"
+        name="material-symbols:robot"
+      />
+      <Icon
+        v-else-if="objectType == ChatObjectTypeEnums.Official"
+        name="ri:service-fill"
+      />
+      <Icon
+        v-else-if="objectType == ChatObjectTypeEnums.ShopKeeper"
+        name="material-symbols:shopping-bag"
+      />
+      <Icon v-else name="material-symbols:person" />
+    </div>
+
     <sub v-if="isStatus" class="sub-status">
       <ServiceStatus :status="entity?.serviceStatus" />
     </sub>
@@ -119,10 +109,6 @@ const src = computed(() =>
   align-items: center;
 }
 .avatar-icon {
-  display: flex;
-  align-items: center;
-  // font-size: 16px;
-  justify-content: center;
-  flex: 1;
+  color: white;
 }
 </style>

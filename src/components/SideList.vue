@@ -27,7 +27,7 @@ const onItemClick = (item: any) => {
         <NuxtLink
           :to="item.to"
           :target="item.target"
-          class="relative flex items-center justify-center rounded-lg size-10 hover:bg-gray-600"
+          class="relative flex items-center justify-center bg-gray-800 rounded-md size-9 hover:bg-gray-700 hover:ring-gray-500 hover:ring-1 hover:rounded-md"
           :title="item.label"
           @click="onItemClick(item)"
         >
