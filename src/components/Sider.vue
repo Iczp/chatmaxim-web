@@ -1,8 +1,12 @@
 <script setup lang="ts">
-
 import { useWebSocketKit } from '../apis/websockets/useWebSocketKit';
 
+const { t } = useI18n();
+const route = useRoute();
+
 const { badge, badgeItems, refresh } = useBadges();
+
+import { type BadgeDto } from '../apis/dtos';
 
 useWebSocketKit({
   onConnected(ws) {
@@ -64,6 +68,29 @@ const footerMenus = ref([
   },
 ]);
 
+const isChatActive = (chatObjectId: number): boolean => {
+  return (
+    route.path.startsWith('/chat/') &&
+    chatObjectId == Number(route.params.chatObjectId)
+  );
+};
+
+const navToChatHitory = (item: BadgeDto) => {
+  const chatObjectId = item.chatObjectId!;
+  // const arg = chatHistorys[chatObjectId];
+  // if (arg) {
+  //   navToChat({
+  //     chatObjectId,
+  //     sessionUnitId: arg.sessionUnitId,
+  //     title: arg.title,
+  //   });
+  //   return;
+  // }
+  // router.push({
+  //   path: `/chat/${item.chatObjectId}`,
+  // });
+};
+
 const activeId = ref<string | undefined>();
 
 const onItemClick = (item: any) => {
@@ -77,6 +104,26 @@ const onItemClick = (item: any) => {
     class="aside flex flex-col bg-gray-900 w-[--sider-width] justify-between text-gray-100 py-4"
   >
     <header>
+      <div
+        class="gap-4 flex-center"
+        v-for="(item, index) in badgeItems"
+        :key="index"
+        :title="item.owner?.fullPathName?.replace('/', ':')"
+        :class="{active: isChatActive(item.chatObjectId!)}"
+        @click="navToChatHitory(item)"
+      >
+        <a-badge :count="item.badge">
+          <MessageOutlined v-if="isChatActive(item.chatObjectId!)" />
+          <!-- <ChatObject :entity="item.owner"></ChatObject> -->
+          <Avatar
+            v-else
+            :entity="item.owner"
+            :size="28"
+            :shape="'square'"
+          ></Avatar>
+        </a-badge>
+      </div>
+
       <SideList :items="menus" @item-click="onItemClick"></SideList>
     </header>
 

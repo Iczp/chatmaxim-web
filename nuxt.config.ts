@@ -50,7 +50,7 @@ export default defineNuxtConfig({
      */
     // dirs: [],
     global: true,
-    dirs: ['~/components'],
+    dirs: ['~/components', '~/types'],
   },
   modules: [
     '@nuxt/icon',
@@ -77,6 +77,6 @@ export default defineNuxtConfig({
     viewer: { endpoint: '/_tailwind', exportViewer: true },
   },
   i18n: {
-    vueI18n: './i18n.config.ts' // if you are using custom path, default
-  }
+    vueI18n: './i18n.config.ts', // if you are using custom path, default
+  },
 });
