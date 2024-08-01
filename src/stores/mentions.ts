@@ -1,7 +1,7 @@
 import { acceptHMRUpdate, defineStore } from 'pinia';
-import { SessionUnitDisplayNameDto } from '../apis/dtos';
+import { type SessionUnitDisplayNameDto } from '../apis/dtos';
 import { SessionUnitService } from '../apis';
-import { useSessionUnitId } from '../commons/useSessionUnit';
+// import { useSessionUnitId } from '../composables/useSessionUnit';
 type NamesType = SessionUnitDisplayNameDto[];
 
 type MentionsType = Array<{
@@ -22,13 +22,19 @@ export const useMentionsStore = defineStore('mentions', {
   },
   getters: {},
   actions: {
-    fetchData(sessionUnitId: string, pageSize: number = 999): Promise<NamesType> {
+    fetchData(
+      sessionUnitId: string,
+      pageSize: number = 999
+    ): Promise<NamesType> {
       return new Promise<NamesType>((resolve, reject) => {
         let list: NamesType = [];
         const _setProcess = (procent: number) => {
           this.process.set(sessionUnitId, procent);
         };
-        const _fetch = (skipCount: number = 0, maxResultCount: number = 999) => {
+        const _fetch = (
+          skipCount: number = 0,
+          maxResultCount: number = 999
+        ) => {
           if (!this.process.has(sessionUnitId)) {
             _setProcess(0);
           }
@@ -64,8 +70,8 @@ export const useMentionsStore = defineStore('mentions', {
     },
     getMentions(sessionUnitId: string): MentionsType | undefined {
       return this.get(sessionUnitId)
-        ?.filter(x => !!x.displayName)
-        .map(x => ({
+        ?.filter((x) => !!x.displayName)
+        .map((x) => ({
           label: x.displayName!,
           value: x.displayName!,
         }));

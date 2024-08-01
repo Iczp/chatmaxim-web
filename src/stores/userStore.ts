@@ -1,6 +1,6 @@
 // @ts-check
 import { defineStore, acceptHMRUpdate } from 'pinia';
-import { TokenDto } from '../apis/auth/dto';
+import { type TokenDto } from '../apis/auth/dto';
 
 /**
  * Simulate a login

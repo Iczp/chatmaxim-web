@@ -50,7 +50,7 @@ export default defineNuxtConfig({
      */
     // dirs: [],
     global: true,
-    dirs: ['~/components', '~/types'],
+    dirs: ['~/components', '~/types', '~/stores', '~/icons'],
   },
   modules: [
     '@nuxt/icon',

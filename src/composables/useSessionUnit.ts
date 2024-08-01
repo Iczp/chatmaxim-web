@@ -1,12 +1,12 @@
 //
 
-import { ComputedRef, computed, onUnmounted, ref, watch } from 'vue';
+// import { ComputedRef, computed, onUnmounted, ref, watch } from 'vue';
 import {
   formatMessageTime,
   getDestinationNameForSessionUnit,
   getSenderNameForMessage,
 } from '../utils/utils';
-import { SessionItemDto, SessionUnitOwnerDto } from '../apis/dtos';
+import type { SessionItemDto, SessionUnitOwnerDto } from '../apis/dtos';
 import { MessageTypeEnums } from '../apis/enums';
 import { useImStore } from '../stores/imStore';
 import { useWindowStore } from '../stores/windowStore';
@@ -14,13 +14,13 @@ import { useRemoteStore } from './useRemoteStore';
 import { usePayload } from './usePayload';
 
 export const computedSessionUnitEntity = (sessionUnitId: string) => {
-  const windowStore = useWindowStore();
-  const isMainWindow = windowStore.name == 'main';
-  if (!isMainWindow) {
-    const payload = usePayload<{ sessionUnit: SessionUnitOwnerDto }>();
-    console.log('payload', payload.value?.sessionUnit);
-    return computed(() => payload.value?.sessionUnit);
-  }
+  // const windowStore = useWindowStore();
+  // const isMainWindow = windowStore.name == 'main';
+  // if (!isMainWindow) {
+  //   const payload = usePayload<{ sessionUnit: SessionUnitOwnerDto }>();
+  //   console.log('payload', payload.value?.sessionUnit);
+  //   return computed(() => payload.value?.sessionUnit);
+  // }
   const store = useImStore();
   return computed(() => store.getSessionUnit(sessionUnitId!));
 };
@@ -30,28 +30,28 @@ export const useSessionUnitId = (sessionUnitId: string) => {
   return useComputedSessionUnit(computedEntity);
 };
 export const useSessionUnitId_back = (sessionUnitId: string) => {
-  const windowStore = useWindowStore();
-  const isMainWindow = windowStore.name == 'main';
+  // const windowStore = useWindowStore();
+  // const isMainWindow = windowStore.name == 'main';
   const store = useImStore();
-  if (!isMainWindow) {
-    // const remoteStore = useRemoteStore<{ sessionUnit: SessionUnitOwnerDto }>();
-    // console.log('remoteStore', remoteStore.value?.sessionUnit);
+  // if (!isMainWindow) {
+  //   // const remoteStore = useRemoteStore<{ sessionUnit: SessionUnitOwnerDto }>();
+  //   // console.log('remoteStore', remoteStore.value?.sessionUnit);
 
-    // watch(
-    //   () => remoteStore.value,
-    //   v => {
-    //     console.log('remoteStore#watch', v);
-    //     if (v) {
-    //       store.setMany([v?.sessionUnit!]);
-    //     }
-    //   },
-    // );
+  //   // watch(
+  //   //   () => remoteStore.value,
+  //   //   v => {
+  //   //     console.log('remoteStore#watch', v);
+  //   //     if (v) {
+  //   //       store.setMany([v?.sessionUnit!]);
+  //   //     }
+  //   //   },
+  //   // );
 
-    const payload = usePayload<{ sessionUnit: SessionUnitOwnerDto }>();
-    console.log('payload', payload.value?.sessionUnit);
-    const computedEntity = computed(() => payload.value?.sessionUnit);
-    return useComputedSessionUnit(computedEntity);
-  }
+  //   const payload = usePayload<{ sessionUnit: SessionUnitOwnerDto }>();
+  //   console.log('payload', payload.value?.sessionUnit);
+  //   const computedEntity = computed(() => payload.value?.sessionUnit);
+  //   return useComputedSessionUnit(computedEntity);
+  // }
 
   // store.getItem(sessionUnitId);
   const computedEntity = computed(() => store.getSessionUnit(sessionUnitId!));
@@ -64,7 +64,7 @@ export const useSessionUnit = (entity: SessionUnitOwnerDto | undefined) => {
 };
 
 export const useComputedSessionUnit = (
-  computedEntity: ComputedRef<SessionUnitOwnerDto | undefined>,
+  computedEntity: ComputedRef<SessionUnitOwnerDto | undefined>
 ) => {
   const entity = computedEntity;
   const isTopping = computed(() => Number(entity.value?.sorting) > 0);
@@ -74,9 +74,9 @@ export const useComputedSessionUnit = (
   const lastMessageId = computed(() => entity.value?.lastMessageId);
 
   const messageType = computed(
-    () => entity.value?.lastMessage?.messageType as MessageTypeEnums | undefined,
+    () => entity.value?.lastMessage?.messageType as MessageTypeEnums | undefined
   );
-  const isImmersed = computed(() => entity.value?.setting?.isImmersed);
+  const isImmersed = computed(() => entity.value?.setting?.isImmersed || false);
 
   const destination = computed(() => entity.value?.destination);
 
@@ -91,7 +91,7 @@ export const useComputedSessionUnit = (
   const sendTime = ref(
     entity.value?.lastMessage?.creationTime
       ? formatMessageTime(new Date(entity.value?.lastMessage?.creationTime!))
-      : '',
+      : ''
   );
 
   const timer = setInterval(() => {
@@ -112,19 +112,25 @@ export const useComputedSessionUnit = (
 
   const badge = computed(() => entity.value?.publicBadge || 0);
 
-  const senderName = computed(() => getSenderNameForMessage(entity.value?.lastMessage));
+  const senderName = computed(() =>
+    getSenderNameForMessage(entity.value?.lastMessage)
+  );
 
-  const destinationName = computed(() => getDestinationNameForSessionUnit(entity.value));
+  const destinationName = computed(() =>
+    getDestinationNameForSessionUnit(entity.value)
+  );
 
   const isShowSender = computed(
-    () => senderName.value && messageType.value != MessageTypeEnums.Cmd,
+    () => senderName.value && messageType.value != MessageTypeEnums.Cmd
   );
 
   const remindMeCount = computed(() => entity.value?.remindMeCount || 0);
 
   const remindAllCount = computed(() => entity.value?.remindAllCount || 0);
 
-  const remindCount = computed(() => remindMeCount.value + remindAllCount.value);
+  const remindCount = computed(
+    () => remindMeCount.value + remindAllCount.value
+  );
 
   const followingCount = computed(() => entity.value?.followingCount || 0);
 
@@ -134,17 +140,23 @@ export const useComputedSessionUnit = (
 
   const memberName = computed(() => entity.value?.setting?.memberName);
 
-  const isShowMemberName = computed(() => entity.value?.setting?.isShowMemberName);
+  const isShowMemberName = computed(
+    () => entity.value?.setting?.isShowMemberName
+  );
 
   const isContacts = computed(() => entity.value?.setting?.isContacts);
 
   const isSelfSender = computed(
-    () => entity.value?.id == entity.value?.lastMessage?.senderSessionUnit?.id,
+    () => entity.value?.id == entity.value?.lastMessage?.senderSessionUnit?.id
   );
 
-  const displaySenderName = computed(() => (isSelfSender.value ? '我' : senderName.value));
+  const displaySenderName = computed(() =>
+    isSelfSender.value ? '我' : senderName.value
+  );
 
-  const readedMessageId = computed(() => entity.value?.setting?.readedMessageId);
+  const readedMessageId = computed(
+    () => entity.value?.setting?.readedMessageId
+  );
 
   // const readedMessageId = entity.value?.setting?.readedMessageId;
 
