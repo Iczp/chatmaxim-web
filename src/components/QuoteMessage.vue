@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { MessageSimpleDto } from '../apis/dtos';
+import { type MessageSimpleDto } from '../apis/dtos';
 import { useMessageEntity } from '../composables/useMessageEntity';
 import MessageProview from './MessageProview.vue';
 import { CloseCircleOutlined } from '@ant-design/icons-vue';
@@ -30,11 +30,18 @@ if (props.flash) {
   <div class="quote-message" :class="{ flash: Number(flashSeconds) > 0 }">
     <div class="quote-message-body" :class="{ reserve: r }">
       <icon type="quote-left" class="icon-quote" />
-      <a class="sender-name" @click.stop="emits('sender', $event)">{{ senderName }}</a>
+      <a class="sender-name" @click.stop="emits('sender', $event)">{{
+        senderName
+      }}</a>
       <MessageProview :entity="entity" @click.stop="emits('content', $event)" />
       <icon type="quote-right" class="icon-quote" />
     </div>
-    <div v-if="removable" class="closable" @click="emits('remove', $event)" title="删除引用">
+    <div
+      v-if="removable"
+      class="closable"
+      @click="emits('remove', $event)"
+      title="删除引用"
+    >
       <CloseCircleOutlined />
     </div>
   </div>

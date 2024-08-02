@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { MessageDto, FileContentDto } from '../apis/dtos';
+import type {  MessageDto, FileContentDto } from '../apis/dtos';
 import Bubble from './Bubble.vue';
 import TextViewer from './TextViewer.vue';
 import prettyBytes from 'pretty-bytes';

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, useSlots, watch } from 'vue';
 
-import { MessageDto } from '../apis/dtos';
+import { type MessageDto } from '../apis/dtos';
 import { MessageTypeEnums } from '../apis/enums';
 import { HeartTwoTone } from '@ant-design/icons-vue';
 import Avatar from './Avatar.vue';
@@ -24,7 +24,7 @@ import MsgRollback from './MsgRollback.vue';
 
 import { SelfImprovement, PersonPin } from '../icons';
 import {
-  ContextmenuInput,
+ type ContextmenuInput,
   LabelType as LabelType,
   MouseButton,
 } from '../commons/contextmenu';
@@ -47,14 +47,20 @@ const emits = defineEmits<{
   remove: [MessageDto?];
 }>();
 
-const { senderName, messageType, isRollbacked, sendTime, sendTimeTitle, state } = useMessageEntity(
-  props.entity,
-);
+const {
+  senderName,
+  messageType,
+  isRollbacked,
+  sendTime,
+  sendTimeTitle,
+  state,
+} = useMessageEntity(props.entity);
 const msg = computed(() => props.entity);
 const isPlay = computed<boolean>(
   () =>
     !!props.playMessageId &&
-    (props.playMessageId == msg.value?.id || props.playMessageId == msg.value?.autoId),
+    (props.playMessageId == msg.value?.id ||
+      props.playMessageId == msg.value?.autoId)
 );
 const messageState = computed(() => props.entity.state);
 
@@ -62,9 +68,9 @@ const { showProfile } = useProfileModal();
 
 watch(
   () => props.entity?.state,
-  v => {
+  (v) => {
     console.log('#watch# props.entity.state', v);
-  },
+  }
 );
 
 const isShowMemberName = ref(true);
@@ -128,7 +134,11 @@ const onQuoteContentClick = (event: MouseEvent) => {
     @click.right.stop.native="onMessageClick($event, MouseButton.Right)"
     :title="`id:${entity.id}`"
   >
-    <header v-if="entity.isShowTime" class="msg-header send-time" :title="sendTimeTitle">
+    <header
+      v-if="entity.isShowTime"
+      class="msg-header send-time"
+      :title="sendTimeTitle"
+    >
       {{ sendTime }}
     </header>
     <MsgRollback v-if="isRollbacked" :name="senderName" />
@@ -146,14 +156,19 @@ const onQuoteContentClick = (event: MouseEvent) => {
             :name="senderName"
             @click.stop.native="onAvatarClick($event, MouseButton.Click)"
             @click.right.stop.native="onAvatarClick($event, MouseButton.Right)"
-            :is-status="Number(entity.senderSessionUnit?.owner?.serviceStatus) > 0"
+            :is-status="
+              Number(entity.senderSessionUnit?.owner?.serviceStatus) > 0
+            "
             thumb
           />
         </aside>
 
         <main class="msg-main">
           <header :size="0" v-if="isShowMemberName" class="msg-main-header">
-            <PersonPin v-if="entity.senderSessionUnit?.isCreator" class="svg-icon s14 color" />
+            <PersonPin
+              v-if="entity.senderSessionUnit?.isCreator"
+              class="svg-icon s14 color"
+            />
             <SelfImprovement class="svg-icon-16" />
             <FavoriteFilled
               v-if="entity.isFollowing"
@@ -174,22 +189,43 @@ const onQuoteContentClick = (event: MouseEvent) => {
             <!-- <p>{{ item }}</p> -->
             <!-- 消息 Start -->
             <!-- messageType:{{ messageType }} / {{ messageType == MessageTypeEnums.Image }} {{ MessageTypeEnums.Image }} -->
-            <MsgImage v-if="messageType == MessageTypeEnums.Image" :item="entity" />
-            <MsgFile v-else-if="messageType == MessageTypeEnums.File" :item="entity" />
+            <MsgImage
+              v-if="messageType == MessageTypeEnums.Image"
+              :item="entity"
+            />
+            <MsgFile
+              v-else-if="messageType == MessageTypeEnums.File"
+              :item="entity"
+            />
             <MsgSound
               v-else-if="messageType == MessageTypeEnums.Sound"
               :item="entity"
               :play="isPlay"
             />
-            <MsgLocation v-else-if="messageType == MessageTypeEnums.Location" :item="entity" />
-            <MsgContacts v-else-if="messageType == MessageTypeEnums.Contacts" :item="entity" />
-            <MsgLink v-else-if="messageType == MessageTypeEnums.Link" :item="entity" />
-            <MsgVideo v-else-if="messageType == MessageTypeEnums.Video" :item="entity" />
+            <MsgLocation
+              v-else-if="messageType == MessageTypeEnums.Location"
+              :item="entity"
+            />
+            <MsgContacts
+              v-else-if="messageType == MessageTypeEnums.Contacts"
+              :item="entity"
+            />
+            <MsgLink
+              v-else-if="messageType == MessageTypeEnums.Link"
+              :item="entity"
+            />
+            <MsgVideo
+              v-else-if="messageType == MessageTypeEnums.Video"
+              :item="entity"
+            />
             <MsgRedEnvelope
               v-else-if="messageType == MessageTypeEnums.RedEnvelope"
               :item="entity"
             />
-            <MsgText v-else-if="messageType == MessageTypeEnums.Text" :item="entity" />
+            <MsgText
+              v-else-if="messageType == MessageTypeEnums.Text"
+              :item="entity"
+            />
 
             <MsgUnsupported v-else :r="entity.isSelf" />
             <!-- 消息 End -->
@@ -251,11 +287,15 @@ const onQuoteContentClick = (event: MouseEvent) => {
   border-radius: 4px;
 }
 .selectable .msg-body-wraper:hover {
-  background-color: var(--message-body-wraper-selectable-background-color-hover);
+  background-color: var(
+    --message-body-wraper-selectable-background-color-hover
+  );
   box-shadow: var(--message-body-wraper-selectable-hover-box-shadow);
 }
 .selectable.checked .msg-body-wraper {
-  background-color: var(--message-body-wraper-selectable-checked-background-color);
+  background-color: var(
+    --message-body-wraper-selectable-checked-background-color
+  );
 }
 .checkbox-container {
   display: flex;

@@ -244,7 +244,7 @@ onDeactivated(() => {
       </RecycleScroller>
     </aside>
 
-    <main class="flex flex-1">
+    <main class="flex flex-col flex-1">
       <!-- <router-view></router-view> -->
       <!-- <router-view v-slot="{ Component, route }">
         <keep-alive :max="10">

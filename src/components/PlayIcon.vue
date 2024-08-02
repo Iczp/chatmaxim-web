@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, watch, ref, CSSProperties, nextTick } from 'vue';
-import { PlayArrow, VideoPause } from '../icons';
+import { computed, watch, ref, type CSSProperties, nextTick } from 'vue';
+// import { PlayArrow, VideoPause } from '../icons';
 const props = withDefaults(
   defineProps<{
     percent?: number;
@@ -9,7 +9,7 @@ const props = withDefaults(
   {
     percent: 0,
     size: 64,
-  },
+  }
 );
 const iconStyle = computed<CSSProperties>(() => ({
   scale: ((props.size || 48) / 24) * 0.75,
@@ -18,22 +18,22 @@ const iconStyle = computed<CSSProperties>(() => ({
 const displayBtn = ref(false);
 watch(
   () => props.percent,
-  percent => {
+  (percent) => {
     // displayBtn.value = true;
     if (percent == 100) {
       // setTimeout(() => {
-        displayBtn.value = true;
+      displayBtn.value = true;
       // }, 0);
     }
     if (percent == 0) {
       // setTimeout(() => {
-        displayBtn.value = false;
+      displayBtn.value = false;
       // }, 0);
     }
   },
   {
     immediate: true,
-  },
+  }
 );
 </script>
 
@@ -48,14 +48,18 @@ watch(
     class="progress"
   >
     <template #format="percent">
-      <PlayArrow v-if="displayBtn" class="svg-icon play-icon" :style="iconStyle" />
+      <PlayArrow
+        v-if="displayBtn"
+        class="svg-icon play-icon"
+        :style="iconStyle"
+      />
       <span v-else class="percent">{{ percent }}%</span>
     </template>
   </a-progress>
 </template>
 
 <style scoped>
-.progress{
+.progress {
   background-color: rgba(0, 0, 0, 0.05);
   border-radius: 50%;
 }

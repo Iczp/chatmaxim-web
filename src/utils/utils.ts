@@ -16,7 +16,7 @@ import type {
 } from '../apis/dtos';
 import { MessageStateEnums, MessageTypeEnums } from '../apis/enums';
 import { formatText } from './formatWords';
-// import { useWindowStore } from '../stores/windowStore';
+import { useWindowStore } from '../stores/windowStore';
 import { message } from 'ant-design-vue';
 import type { SoundContentDto } from '../apis/dtos/message/SoundContentDto';
 import type { LinkContentDto } from '../apis/dtos/message/LinkContentDto';

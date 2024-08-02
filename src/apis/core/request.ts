@@ -19,7 +19,7 @@ import { CancelablePromise } from './CancelablePromise';
 import type { OnCancel } from './CancelablePromise';
 import type { OpenAPIConfig } from './OpenAPI';
 import { getToken, isTokenUrl, refreshToken } from '../auth/TokenController';
-// import { useWindowStore } from '../../stores/windowStore';
+import { useWindowStore } from '../../stores/windowStore';
 
 
 let tokenCount: number = 0;

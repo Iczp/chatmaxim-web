@@ -39,9 +39,9 @@ const defaultValue: WindowState = {
   language: 'zh-CN',
 };
 
-export const useWindowStore = defineStore('window', {})
+// export const useWindowStore = defineStore('window', {})
 
-export const useWindowStore1 = defineStore('window', {
+export const useWindowStore = defineStore('window', {
   state: (): WindowState => ({
     ...defaultValue,
   }),

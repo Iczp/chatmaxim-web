@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, ref, CSSProperties } from 'vue';
-import { MessageDto, SoundContentDto } from '../apis/dtos';
+import { computed, ref, type CSSProperties } from 'vue';
+import type { MessageDto, SoundContentDto } from '../apis/dtos';
 import Bubble from './Bubble.vue';
 import SoundPlay from './SoundPlay.vue';
 const props = defineProps<{

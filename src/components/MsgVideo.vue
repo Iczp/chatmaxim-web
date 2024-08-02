@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import type { MessageDto, VideoContentDto } from '../apis/dtos';
 import MsgImg from './MsgImg.vue';
 import PlayIcon from './PlayIcon.vue';
-import { formatDurations } from '../commons/utils';
+import { formatDurations } from '../utils/utils';
 const props = defineProps<{
   item: MessageDto;
 }>();
@@ -24,7 +24,7 @@ const suffix = computed(() =>
     :suffix="suffix"
     :size="content.size"
   >
-    <div class="abs pointer-events-none">
+    <div class="pointer-events-none abs">
       <PlayIcon class="btn-play" :percent="100" :size="36" />
     </div>
   </MsgImg>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { formatWords, WordDto } from '../commons/formatWords';
-import { setSelectedNode } from '../commons/utils';
+import { formatWords, type WordDto } from '../utils/formatWords';
+import { setSelectedNode } from '../utils/utils';
 const props = defineProps<{
   value: string;
 }>();

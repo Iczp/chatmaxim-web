@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { LinkContentDto, MessageDto, TextContentDto } from '../apis/dtos';
+import type { LinkContentDto, MessageDto, TextContentDto } from '../apis/dtos';
 import Bubble from './Bubble.vue';
-import TextViewer from '.Avatar.vue';
 const props = defineProps<{
   item: MessageDto;
 }>();

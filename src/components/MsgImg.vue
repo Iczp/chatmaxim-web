@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
-import { formatImageRect, formatUrl, getImageRect } from '../commons/utils';
+import { formatImageRect, formatUrl, getImageRect } from '../utils/utils';
 import { useDownload } from '../composables/useDownload';
 import { useI18n } from 'vue-i18n';
 import prettyBytes from 'pretty-bytes';
@@ -93,7 +93,7 @@ if (!props.lazy) {
 
 <template>
   <div class="msg-img" ref="target">
-    <div v-if="isPending" class="abs pointer-events-none">
+    <div v-if="isPending" class="pointer-events-none abs">
       <a-progress
         type="circle"
         :percent="percent"

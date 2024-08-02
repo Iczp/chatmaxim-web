@@ -2,10 +2,10 @@ import { h, toRaw } from 'vue';
 import { type MessageDto } from '../../apis/dtos';
 import { ChatObjectTypeEnums } from '../../apis/enums';
 import ContextMenu from '@imengyu/vue3-context-menu';
-import { Remind, GroupRemove, PersonAdd, WavingHand, ChatOff, ChatOn } from '../../icons';
-import { sessionRequest } from '../../ipc/sessionRequest';
-import { MessageContextMenuInput, getTheme, iconClass } from '.';
-import { getSenderNameForMessage, navToChat } from '../utils';
+// import { Remind, GroupRemove, PersonAdd, WavingHand, ChatOff, ChatOn } from '../../icons';
+// import { sessionRequest } from '../../ipc/sessionRequest';
+import { type MessageContextMenuInput, getTheme, iconClass } from '.';
+import { getSenderNameForMessage } from '../../utils/utils';
 import { FollowService } from '../../apis';
 import { message } from 'ant-design-vue';
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
@@ -37,7 +37,7 @@ export const showContextMenuForMessageAvatar = ({
 
   const senderName = getSenderNameForMessage(entity);
   const isIn = (objectTypes: ChatObjectTypeEnums[]) => {
-    return objectTypes.some(x => x == sessionUnit?.destination?.objectType);
+    return objectTypes.some((x) => x == sessionUnit?.destination?.objectType);
   };
   const isFriendship = entity.senderSessionUnit?.isFriendship;
   // const { t } = useI18n();
@@ -95,7 +95,7 @@ export const showContextMenuForMessageAvatar = ({
             message.warn({
               content: t(
                 `Unable to '{0}' on oneself`,
-                entity.isFollowing ? t('Unfollow') : t('Following'),
+                entity.isFollowing ? t('Unfollow') : t('Following')
               ),
             });
             return;
@@ -107,12 +107,16 @@ export const showContextMenuForMessageAvatar = ({
               sessionUnitId,
               idList: [entity.senderSessionUnit!.id!],
             })
-              .then(res => {
+              .then((res) => {
                 message.success({ content: t('Unfollow') });
                 entity.isFollowing = false;
-                onFollowing?.call(this, entity.senderSessionUnit!.id!, entity.isFollowing);
+                onFollowing?.call(
+                  this,
+                  entity.senderSessionUnit!.id!,
+                  entity.isFollowing
+                );
               })
-              .catch(err => {
+              .catch((err) => {
                 message.error({ content: err.body?.error?.message });
               });
           } else {
@@ -120,13 +124,17 @@ export const showContextMenuForMessageAvatar = ({
               sessionUnitId,
               idList: [entity.senderSessionUnit!.id!],
             })
-              .then(res => {
+              .then((res) => {
                 message.success({ content: t('Following') });
                 entity.isFollowing = true;
-                onFollowing?.call(this, entity.senderSessionUnit!.id!, entity.isFollowing);
+                onFollowing?.call(
+                  this,
+                  entity.senderSessionUnit!.id!,
+                  entity.isFollowing
+                );
                 console.log('FollowService.postApiChatFollow', res);
               })
-              .catch(err => {
+              .catch((err) => {
                 message.error({ content: err.body?.error?.message });
               });
           }
@@ -144,15 +152,17 @@ export const showContextMenuForMessageAvatar = ({
               params: {
                 ownerId: chatObjectId,
                 destinationId: entity.senderSessionUnit?.owner?.id!,
-                requestMessage: `你好:${entity.senderSessionUnit?.displayName || ''}`,
+                requestMessage: `你好:${
+                  entity.senderSessionUnit?.displayName || ''
+                }`,
               },
               destination: toRaw(entity.senderSessionUnit?.owner),
             },
           })
-            .then(res => {
+            .then((res) => {
               console.log(`sessionRequest`, res);
             })
-            .catch(err => {
+            .catch((err) => {
               console.error(`sessionRequest`, err);
             });
         },
@@ -160,7 +170,9 @@ export const showContextMenuForMessageAvatar = ({
       {
         label: t('Private messaging'),
         icon: h(ChatOn, iconClass),
-        hidden: !isFriendship || entity.senderSessionUnit?.friendshipSessionUnitId == sessionUnitId,
+        hidden:
+          !isFriendship ||
+          entity.senderSessionUnit?.friendshipSessionUnitId == sessionUnitId,
         disabled: false,
         onClick: () => {
           navToChat({
@@ -179,7 +191,9 @@ export const showContextMenuForMessageAvatar = ({
           Modal.confirm({
             title: t('Remove from group chat'),
             icon: h(ExclamationCircleOutlined),
-            content: t('Ask remove group chat', [entity.senderSessionUnit?.owner?.name]),
+            content: t('Ask remove group chat', [
+              entity.senderSessionUnit?.owner?.name,
+            ]),
             cancelText: t('Cancel'),
             okText: t('Confirm remove'),
             async onOk() {

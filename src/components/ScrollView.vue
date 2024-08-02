@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed, ref, useAttrs, useSlots } from 'vue';
-import { PerfectScrollbarOptions, PerfectScrollbar } from 'vue3-perfect-scrollbar';
+import { PerfectScrollbar } from 'vue3-perfect-scrollbar';
 import { useScrollTo } from '@pureadmin/utils';
 const slots = useSlots();
 const attrs = useAttrs();
 
 const props = defineProps<{
-  options?: PerfectScrollbarOptions;
+  options?: any;
 }>();
 export type ScrollToArgs = {
   directions?: 'scrollTop' | 'scrollLeft';
@@ -15,7 +15,9 @@ export type ScrollToArgs = {
   callback?: (() => void) | undefined;
 };
 const scrollbarRef = ref();
-const element = computed<HTMLElement | undefined>(() => scrollbarRef.value.ps?.element);
+const element = computed<HTMLElement | undefined>(
+  () => scrollbarRef.value.ps?.element
+);
 
 const scrollTo = (args?: ScrollToArgs): void => {
   const el: HTMLElement | undefined = element.value;
@@ -44,7 +46,11 @@ defineExpose({
 
 <template>
   <PerfectScrollbar ref="scrollbarRef" v-bind="attrs">
-    <template v-for="(slot, index) of Object.keys(slots)" :key="index" v-slot:[slot]>
+    <template
+      v-for="(slot, index) of Object.keys(slots)"
+      :key="index"
+      v-slot:[slot]
+    >
       <slot :name="slot"></slot>
     </template>
   </PerfectScrollbar>
