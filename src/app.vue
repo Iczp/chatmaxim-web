@@ -1,5 +1,11 @@
 <script lang="ts" setup>
-
+const isDark = useDark();
+const setBrowserColor = (isDark: boolean) =>
+  useBrowserColor({
+    themeColor: isDark ? '#111827' : '#f8fafc',
+    appleStatusBarStyle: 'black-translucent',
+  });
+watch(isDark, setBrowserColor);
 
 </script>
 

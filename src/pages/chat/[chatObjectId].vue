@@ -10,7 +10,7 @@ import { EditOutlined, SettingOutlined } from '@ant-design/icons-vue';
 import { type SessionItemDto } from '../../apis/dtos';
 // import { useImStore } from '../stores/imStore';
 // import { navToChat as navToChatX } from '../commons/utils';
-import { showContextMenuForSession } from '~/commons/contextmenu';
+// import { showContextMenuForSession } from '~/commons/contextmenu';
 // import { createRoom } from '../commons/createRoom';
 // import { eventBus } from '../commons/eventBus';
 // import { useSessionUnitList } from '../commons/useSessionUnitList';
@@ -18,6 +18,7 @@ import { showContextMenuForSession } from '~/commons/contextmenu';
 // import { useI18n } from 'vue-i18n';
 // import { Plus } from '../icons';
 
+const  showContextMenuForSession = ()=>{}
 
 definePageMeta({
   layout: 'chating-layout',
@@ -106,21 +107,13 @@ const onItemDbClick = (item: SessionItemDto) => {
 const onItemClick = (item: SessionItemDto) => {
   const entity = store.getSessionUnit(item.id!);
   console.log('onItemClick', item, entity);
-  navToChat(item);
+  navToChat({
+    chatObjectId:item.ownerId!,
+    sessionUnitId: item.id!,
+  });
 };
 
-const navToChat = (item: SessionItemDto) => {
-  // console.log(item);
-  // if (item.id == acitveSessionUnitId.value) {
-  //   delete chatHistorys[props.chatObjectId!];
-  //   router.push(`/chat/${props.chatObjectId}`);
-  //   return;
-  // }
-  // navToChatX({
-  //   chatObjectId: props.chatObjectId!,
-  //   sessionUnitId: item.id,
-  // });
-};
+
 
 const keyword = ref<string>('');
 
@@ -180,8 +173,8 @@ onDeactivated(() => {
 </script>
 
 <template>
-  <main class="flex flex-row">
-    <aside class="nav-side">
+  <main class="flex flex-row h-full ">
+    <aside class="border-r nav-side ">
       <header class="nav-side-header">
         <div class="current-chat-object">
           <ChatObject :entity="currentChatObject">
@@ -251,13 +244,14 @@ onDeactivated(() => {
       </RecycleScroller>
     </aside>
 
-    <main class="content">
+    <main class="flex flex-1">
       <!-- <router-view></router-view> -->
-      <router-view v-slot="{ Component, route }">
+      <!-- <router-view v-slot="{ Component, route }">
         <keep-alive :max="10">
           <component :is="Component" :key="route.path" />
         </keep-alive>
-      </router-view>
+      </router-view> -->
+      <NuxtPage :keepalive="{max:10}" />
     </main>
   </main>
 </template>

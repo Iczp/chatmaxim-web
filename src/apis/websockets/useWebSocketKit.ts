@@ -5,8 +5,9 @@ import type { ReceivedDto } from './ReceivedDto';
 import { useWebSocketCore } from './useWebSocketCore';
 import { TicketService } from './TicketService';
 import { ref } from 'vue';
-// import { eventBus } from '../../commons/eventBus';
+import { eventBus } from '../../commons/eventBus';
 import { useWebsocketUi } from './useWebsocketUi';
+import { websocketHandle } from './websocketHandle';
 // import { globalEvent } from '../../global-events';
 
 export let connectionState: ConnectionState = ConnectionState.None;
@@ -80,7 +81,7 @@ export const useWebSocketKit = ({
     },
     onMessage: (ws: WebSocket, e: MessageEvent<any>) => {
       // setState(ConnectionState.Ok);
-      
+
       if (typeof e.data !== 'string') {
         return;
       }
@@ -99,12 +100,15 @@ export const useWebSocketKit = ({
       // object message
       try {
         console.log(`useWebSocketKit WebSocket Received:`, e.data);
-        const data = JSON.parse(e.data) as ReceivedDto<any>;
+        // const data = JSON.parse(e.data) as ReceivedDto<any>;
         // emit self window
         // ipcRenderer.emit('websocket', {}, { payload: e.data });
         // sent to remote window
         // ipcRenderer.invoke('websocket', e.data);
         // globalEvent.invoke('websocket@message', e.data);
+        // eventBus.emit('message', data);
+
+        websocketHandle({ payload: e.data });
       } catch (error) {
         console.error(`data:${error}`);
       }
@@ -113,14 +117,14 @@ export const useWebSocketKit = ({
       // globalEvent.invoke('websocket@connected');
       console.log('useWebSocketKit onConnected', ws);
       setState(ConnectionState.Ok);
-      // eventBus.emit('connected');
+      eventBus.emit('connected');
       onConnected?.(ws);
     },
     onDisconnected: (ws: WebSocket, event: CloseEvent) => {
       // globalEvent.invoke('websocket@disconnected');
       console.log('useWebSocketKit onDisconnected', ws, event);
       setState(ConnectionState.Close);
-      // eventBus.emit('disconnected');
+      eventBus.emit('disconnected');
     },
     onError: (ws: WebSocket, event: Event) => {
       // globalEvent.invoke('websocket@error');

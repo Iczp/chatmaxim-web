@@ -1,0 +1,38 @@
+.ant-message {
+  top: 64px;
+}
+
+.ant-message-notice.websocket-state .ant-message-notice-content {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.686);
+  font-size: 12px;
+}
+
+.ant-drawer .ant-drawer-body {
+  padding: 0;
+}
+.ant-drawer .ant-drawer-header {
+  padding: 16px 0;
+}
+
+/* ant-modal */
+.ant-modal-wrap {
+  /* -webkit-app-region: drag; */
+}
+
+.ant-modal-content {
+  user-select: none;
+  -webkit-app-region: no-drag;
+}
+
+.ant-layout,
+.ant-layout.page,
+.ant-layout .ant-layout-footer,
+.ant-layout-footer {
+  background-color: unset;
+  color: unset;
+}
+
+.code-viewer .ant-tabs .ant-tabs-tabpane {
+  height: 100%;
+}

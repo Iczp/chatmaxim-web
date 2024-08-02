@@ -100,7 +100,7 @@ const onItemClick = (item: any) => {
 </script>
 
 <template>
-  <div
+  <aside
     class="aside flex flex-col bg-gray-900 w-[--sider-width] justify-between text-gray-100 py-4"
   >
     <header>
@@ -112,6 +112,6 @@ const onItemClick = (item: any) => {
     <footer>
       <SideList :items="footerMenus" @item-click="onItemClick"></SideList>
     </footer>
-  </div>
+  </aside>
 </template>
 <style lang="scss" scoped></style>

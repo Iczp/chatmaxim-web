@@ -10,6 +10,11 @@
   :root {
     --sider-width: 64px;
     --chat-title-height: 64px;
+    --side-width: 64px;
+    --page-title-height: 64px;
+    --message-max-width: 360px;
+
+    
   }
   #chatmaxim {
     height: 100%;
@@ -39,6 +44,9 @@
 
   .flex-center {
     @apply flex justify-center items-center;
+  }
+  .text-ellipsis {
+    @apply truncate;
   }
 }
 

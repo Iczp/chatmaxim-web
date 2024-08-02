@@ -83,7 +83,7 @@ const onItemClick = (event: MouseEvent | PointerEvent) => {
 <template>
   <chat-object
     :entity="destination"
-    class="session-item"
+    class="h-16 session-item"
     draggable="true"
     @dragstart="ondragstart"
     :badge="badge"
@@ -184,14 +184,14 @@ const onItemClick = (event: MouseEvent | PointerEvent) => {
 
 .session-item::after {
   content: '';
-  /* height: 1px;
+  height: 1px;
   left: 68px;
   right: 0px;
   bottom: 0;
   position: absolute;
   transform: scaleY(0.5);
   overflow: hidden;
-  background-color: var(--divider-color); */
+  background-color: var(--divider-color);
 }
 .session-item:last-child::after {
   /* display: none; */
@@ -319,4 +319,4 @@ const onItemClick = (event: MouseEvent | PointerEvent) => {
   }
 }
 </style>
-../stores/imStore
+

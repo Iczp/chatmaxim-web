@@ -2,28 +2,28 @@ import { h } from 'vue';
 import { message } from 'ant-design-vue';
 import ContextMenu from '@imengyu/vue3-context-menu';
 import { MessageTypeEnums } from '../../apis/enums';
-import {
-  forwardMessage,
-  rollbackMessage,
-  setFavorite,
-} from '../../commons/messageContextMenuHandle';
-import {
-  CheckList,
-  ContentCopy,
-  Forward,
-  Rollback,
-  Quote,
-  BookmarkAdd,
-  BookmarkRemove,
-  Alarm,
-  VideoStop,
-  VideoPlay,
-  FileDownload,
-} from '../../icons';
-import { MessageContextMenuInput, getTheme, iconClass } from '.';
+// import {
+//   forwardMessage,
+//   rollbackMessage,
+//   setFavorite,
+// } from '../../commons/messageContextMenuHandle';
+// import {
+//   CheckList,
+//   ContentCopy,
+//   Forward,
+//   Rollback,
+//   Quote,
+//   BookmarkAdd,
+//   BookmarkRemove,
+//   Alarm,
+//   VideoStop,
+//   VideoPlay,
+//   FileDownload,
+// } from '../../icons';
+import { type MessageContextMenuInput, getTheme, iconClass } from '.';
 import { useClipboard } from '@vueuse/core';
-import { formatMessageContent, getSelectedText, isMessageUrl } from '../utils';
-import { saveAsOfMessage } from '../../ipc/saveAs';
+import { formatMessageContent, getSelectedText, isMessageUrl } from '../../utils/utils';
+// import { saveAsOfMessage } from '../../ipc/saveAs';
 
 export const showContextMenuForMessageContent = ({
   t,
