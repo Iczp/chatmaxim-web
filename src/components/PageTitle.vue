@@ -170,4 +170,3 @@ const toggleAlwayOnTop = () => {
   transform: rotate(-45deg);
 }
 </style>
-../stores/useWindowStore../stores/windowStore

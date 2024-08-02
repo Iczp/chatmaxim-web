@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { setShell } from '../ipc/setShell';
+// import { setShell } from '../ipc/setShell';
 import { Link } from '../icons';
 const props = defineProps<{
   value: string;
 }>();
 
 const openUrl = () => {
-  setShell({
-    method: 'openExternal',
-    args: [props.value],
-  });
+  console.log('openUrl', props.value);
+
+  // setShell({
+  //   method: 'openExternal',
+  //   args: [props.value],
+  // });
 };
 </script>
 

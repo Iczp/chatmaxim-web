@@ -5,7 +5,8 @@ import { type MessageDto } from '../apis/dtos';
 import { MessageTypeEnums } from '../apis/enums';
 import { HeartTwoTone } from '@ant-design/icons-vue';
 import Avatar from './Avatar.vue';
-import { FavoriteFilled, FavoriteOutline } from '../icons';
+// import { FavoriteFilled, FavoriteOutline } from '../icons';
+// import { SelfImprovement, PersonPin } from '../icons';
 
 import MsgText from './MsgText.vue';
 import MsgCmd from './MsgCmd.vue';
@@ -22,7 +23,7 @@ import MsgState from './MsgState.vue';
 import QuoteMessage from './QuoteMessage.vue';
 import MsgRollback from './MsgRollback.vue';
 
-import { SelfImprovement, PersonPin } from '../icons';
+
 import {
  type ContextmenuInput,
   LabelType as LabelType,
@@ -169,7 +170,7 @@ const onQuoteContentClick = (event: MouseEvent) => {
               v-if="entity.senderSessionUnit?.isCreator"
               class="svg-icon s14 color"
             />
-            <SelfImprovement class="svg-icon-16" />
+            <!-- <SelfImprovement class="svg-icon-16" /> -->
             <FavoriteFilled
               v-if="entity.isFollowing"
               class="svg-icon s14"

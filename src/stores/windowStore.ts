@@ -1,5 +1,5 @@
 import { acceptHMRUpdate, defineStore } from 'pinia';
-import type { WindowState } from '~/types/WindowState';
+import type { WindowState } from '../types/WindowState';
 // import { useShortcutStore } from './shortcutStore';
 
 const defaultValue: WindowState = {
@@ -142,6 +142,8 @@ export const useWindowStore = defineStore('window', {
   },
 });
 
+
+console.log('windowStore', useWindowStore);
 if (import.meta.hot) {
   import.meta.hot.accept(acceptHMRUpdate(useWindowStore, import.meta.hot));
 }

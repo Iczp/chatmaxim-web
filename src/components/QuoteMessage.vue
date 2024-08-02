@@ -29,12 +29,12 @@ if (props.flash) {
 <template>
   <div class="quote-message" :class="{ flash: Number(flashSeconds) > 0 }">
     <div class="quote-message-body" :class="{ reserve: r }">
-      <icon type="quote-left" class="icon-quote" />
+      <QuoteLeft class="icon-quote" />
       <a class="sender-name" @click.stop="emits('sender', $event)">{{
         senderName
       }}</a>
       <MessageProview :entity="entity" @click.stop="emits('content', $event)" />
-      <icon type="quote-right" class="icon-quote" />
+      <QuoteRight class="icon-quote" />
     </div>
     <div
       v-if="removable"

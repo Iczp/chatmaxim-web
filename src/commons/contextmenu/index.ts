@@ -106,22 +106,22 @@ export const onAvatarClick_Pop = ({
   };
   console.log('event', params, event);
   const senderSessionUnit = entity.senderSessionUnit;
-  setProfile({
-    name: 'pop',
-    path: `/profile/${chatObjectId}/${senderSessionUnit?.id}`,
-    position: 'absolute',
-    isAlwaysOnTop: true,
-    x: event.clientX,
-    y: event.clientY,
-    size: {
-      width: 280,
-      height: senderSessionUnit?.isFriendship || false ? 360 : 180,
-    },
-    payload: toRaw(senderSessionUnit),
-    refer: '$sender',
-    visiblity: true,
-    focus: true,
-  });
+  // setProfile({
+  //   name: 'pop',
+  //   path: `/profile/${chatObjectId}/${senderSessionUnit?.id}`,
+  //   position: 'absolute',
+  //   isAlwaysOnTop: true,
+  //   x: event.clientX,
+  //   y: event.clientY,
+  //   size: {
+  //     width: 280,
+  //     height: senderSessionUnit?.isFriendship || false ? 360 : 180,
+  //   },
+  //   payload: toRaw(senderSessionUnit),
+  //   refer: '$sender',
+  //   visiblity: true,
+  //   focus: true,
+  // });
 };
 
 export const onQuoteAvatarClick = (args: ArgsContext) => {
@@ -186,23 +186,23 @@ export const onContentClick = ({
     const url = entity.content?.url;
     const path = addParamsToUrl(routeUrl, queryString || { url });
     // const path = routeUrl+'?url=' + url;
-    return openChildWindow({
-      t,
-      window: {
-        name: `message-viewer`,
-        path: path,
-        payload: <ViewerPayload>{
-          currentIndex: 0,
-          chatObjectId,
-          sessionUnit,
-          messages: [entity],
-        },
-        // isModel: !env.isDev,
-        // parent: windowStore.name,
-        isPreventClose: true,
-        visiblity: true,
-      },
-    });
+    // return openChildWindow({
+    //   t,
+    //   window: {
+    //     name: `message-viewer`,
+    //     path: path,
+    //     payload: <ViewerPayload>{
+    //       currentIndex: 0,
+    //       chatObjectId,
+    //       sessionUnit,
+    //       messages: [entity],
+    //     },
+    //     // isModel: !env.isDev,
+    //     // parent: windowStore.name,
+    //     isPreventClose: true,
+    //     visiblity: true,
+    //   },
+    // });
   };
 
   if (isPdfOfMessage(entity)) {
