@@ -230,7 +230,7 @@ export const onContentClick = ({
 
   if (classNames.some((x) => x == 'link')) {
     if (classNames.some((x) => x == 'url')) {
-      openBrowser({ url: el.title });
+      // openBrowser({ url: el.title });
       return;
     }
   }
