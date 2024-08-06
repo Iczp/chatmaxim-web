@@ -39,12 +39,14 @@ const defaultValue: WindowState = {
   language: 'zh-CN',
 };
 
+
+
 export const useWindowStore = defineStore('window', {
   state: (): WindowState => ({
     ...defaultValue,
   }),
   getters: {
-    winId: (state) => (): number | undefined => state.windowId,
+    winId: (state) => () => state.windowId,
     /**
      * 是否单独立聊天窗口
      * @param state
@@ -140,8 +142,6 @@ export const useWindowStore = defineStore('window', {
   },
 });
 
-
-console.log('windowStore', useWindowStore);
 if (import.meta.hot) {
   import.meta.hot.accept(acceptHMRUpdate(useWindowStore, import.meta.hot));
 }

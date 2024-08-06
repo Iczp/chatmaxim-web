@@ -228,7 +228,7 @@ onDeactivated(() => {
           ></Loading>
         </template>
         <template #after>
-          <Loading v-if="isPendingOfFetchHistorical" :text="t('loading')"</Loading>
+          <Loading v-if="isPendingOfFetchHistorical" :text="t('loading')"></Loading>
         </template>
         <template v-slot="{ item, index }: { item: SessionItemDto, index: number }">
           <SessionItem

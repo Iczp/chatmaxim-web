@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { nextTick, onMounted, ref } from 'vue';
+import { useShortcuts } from '../composables/useShortcuts';
 import {
   UploadOutlined,
   MehOutlined,
@@ -67,6 +68,7 @@ const emits = defineEmits<{
       messageType: MessageTypeEnums;
       content: MessageContent;
       event?: MouseEvent | PointerEvent | undefined;
+      shortcuts?: string;
     }
   ];
   open: [
@@ -133,6 +135,22 @@ const onTextChange = (...e: any) => {
 const onTextSelect = (e: any) => {
   console.log('onTextChange', e);
 };
+
+useShortcuts({
+  shortcuts: 'Ctrl+Enter',
+  handle(isPressed, isActive, shortcuts) {
+    if (isPressed && isActive) {
+      emits('send', {
+        messageType: MessageTypeEnums.Text,
+        content: <TextContentDto>{
+          text: inputValue.value,
+        },
+        shortcuts,
+      });
+    }
+  },
+});
+
 const send = (event?: MouseEvent | PointerEvent): void => {
   emits('send', {
     messageType: MessageTypeEnums.Text,

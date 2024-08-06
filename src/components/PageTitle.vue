@@ -13,10 +13,9 @@ import {
 } from '@ant-design/icons-vue';
 // import ToolBar from './TooBar.vue';
 // import { setWindow } from '../ipc/setWindow';
-// import { useWindowStore } from '../stores/windowStore';
-import { computed } from 'vue';
+import { useWindowStore } from '../stores/windowStore';
 
-// const windowStore = useWindowStore();
+const windowStore = useWindowStore();
 const props = withDefaults(
   defineProps<{
     title?: string;
@@ -27,7 +26,7 @@ const props = withDefaults(
   }>(),
   {
     search: false,
-  },
+  }
 );
 const onTitleClick = () => {
   console.log('onTitleClick');
@@ -47,26 +46,34 @@ const toggleAlwayOnTop = () => {
         <slot>
           <a-space>
             <div class="main-title-text">
-              <text class="text-ellipsis no-drag" @click="$emit('titleClick', $event)">
+              <text
+                class="text-ellipsis no-drag"
+                @click="$emit('titleClick', $event)"
+              >
                 {{ title }}
               </text>
             </div>
 
-            <VerifiedOutlined v-if="search" style="color: rgb(0, 207, 0); font-size: 16px" />
+            <VerifiedOutlined
+              v-if="search"
+              style="color: rgb(0, 207, 0); font-size: 16px"
+            />
             <slot name="title"></slot>
           </a-space>
         </slot>
       </div>
       <slot v-if="description" name="description">
         <div class="sub-title">
-          <text class="no-drag" @click="$emit('subClick', $event)">{{ description }}</text>
+          <text class="no-drag" @click="$emit('subClick', $event)">{{
+            description
+          }}</text>
         </div>
       </slot>
     </div>
     <div class="page-title-right no-drag">
       <!-- <tool-bar> -->
-        <slot name="icon"></slot>
-        <!-- <a-button
+      <slot name="icon"></slot>
+      <!-- <a-button
           v-if="top"
           type="text"
           class="btn"
@@ -75,9 +82,9 @@ const toggleAlwayOnTop = () => {
         >
           <PushpinOutlined class="pin" :class="{ 'alway-on-top': isAlwaysOnTop }" />
         </a-button> -->
-        <a-button v-if="search" type="text" class="btn" title="搜索">
-          <SearchOutlined />
-        </a-button>
+      <a-button v-if="search" type="text" class="btn" title="搜索">
+        <SearchOutlined />
+      </a-button>
       <!-- </tool-bar> -->
       <slot v-if="more">
         <a-button type="text" class="btn" @click="$emit('more', $event)">

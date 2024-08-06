@@ -1,4 +1,4 @@
-import { WindowParams } from './WindowParams';
+import { type WindowParams } from './WindowParams';
 
 export type WindowState = WindowParams & {
   machineId?: string;

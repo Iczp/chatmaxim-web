@@ -1,5 +1,5 @@
-import { AppInfo } from './AppInfo';
-import { Size } from './Size';
+import { type AppInfo } from './AppInfo';
+import { type Size } from './Size';
 
 export type WindowParams = {
   /**

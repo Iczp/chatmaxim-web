@@ -10,6 +10,7 @@ import { showContextMenuForMessageContent } from './showContextMenuForMessageCon
 import { showContextMenuForMessageSelect } from './showContextMenuForMessageSelect';
 // import { setProfile } from '../../ipc/setProfile';
 import { useWindowStore } from '../../stores/windowStore';
+console.log('useWindowStore', useWindowStore);
 // import { openChildWindow } from '../../ipc/openChildWindow';
 import { env } from '../../env';
 import { MessageTypeEnums } from '../../apis/enums';

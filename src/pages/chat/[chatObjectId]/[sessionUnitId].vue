@@ -430,7 +430,7 @@ const sendMessageContent = async ({
           // }, 1000);
 
           // scroll.value?.scrollTo({ duration: 0 });
-          // nextTick(() => scroll.value?.scrollTo({ duration: 1500 }));
+          nextTick(() => scroll.value?.scrollTo({ duration: 500 }));
         })
         .catch((err) => {
           spliceItem(input.autoId, []);

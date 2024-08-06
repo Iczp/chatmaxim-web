@@ -327,7 +327,8 @@ code {
   } */
 }
 
-[color-scheme='light']:root {
+/* [color-scheme='light'] */
+:root {
   /* body */
   --background-color: #f9fbff;
   --background-color-normal: rgba(248, 248, 248, 0.5);
@@ -897,4 +898,29 @@ code {
   .ps .ps__rail-y.ps--clicking {
     background-color: #4242423f;
   }
+}
+
+
+.bubble {
+  --r: 10px; /* the radius */
+  --t: 12px; /* the size of the tail */
+  position: relative;
+  /* max-width: 300px; */
+  /* padding: calc(2 * var(--r) / 3) calc(2 * var(--r) / 3 + 8px); */
+  padding: 0px;
+  -webkit-mask: radial-gradient(var(--t) at var(--_d) 0, #0000 98%, #000 102%) var(--_d) 6px /
+      calc(100% - var(--r)) var(--t) no-repeat,
+    conic-gradient(at var(--r) var(--r), #000 75%, #0000 0) calc(var(--r) / -2) calc(var(--r) / -2)
+      padding-box,
+    radial-gradient(50% 50%, #000 98%, #0000 102%) 0px 0 / var(--r) var(--r) space padding-box;
+  background: linear-gradient(135deg, rgba(14, 55, 205, 0.3), rgba(1, 156, 148, 0.3)) border-box;
+
+  /* -webkit-mask: radial-gradient(var(--t) at var(--_d) 0, #0000 98%, #000 102%) var(--_d) 100% /
+      calc(100% - var(--r)) var(--t) no-repeat,
+    conic-gradient(at var(--r) var(--r), #000 75%, #0000 0) calc(var(--r) / -2) calc(var(--r) / -2)
+      padding-box,
+    radial-gradient(50% 50%, #000 98%, #0000 101%) 0 0 / var(--r) var(--r) space padding-box;
+  background: linear-gradient(135deg, #fe6d00, #1384c5) border-box; */
+
+  color: #000000;
 }

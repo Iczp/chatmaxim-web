@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ChatObjectDto, SessionRequestDetailDto } from '../apis/dtos';
+import type { ChatObjectDto, SessionRequestDetailDto } from '../apis/dtos';
 import ChatObject from './ChatObject.vue';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
