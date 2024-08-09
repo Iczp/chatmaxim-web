@@ -1,14 +1,15 @@
 // import { CancelablePromise } from '../core/CancelablePromise';
 
-import { TokenService } from './TokenService';
+import {
+  TokenService,
+  TOKEN_URL,
+  TOKEN_LOGOUT_URL,
+  TOKEN_KEY,
+} from './TokenService';
 import type { TokenDto, LoginResult, LoginInput } from './dto';
 import { GrantTypeEnum } from './dto/GrantTypeEnum';
 import { env } from '../../env';
 import type { TokenCodeInput } from './dto/TokenCodeInput';
-
-export const TOKEN_KEY: string = env.token_key;
-
-export const TOKEN_URL: string = '/connect/token';
 
 let cacheToken: TokenDto | null = null;
 
@@ -20,7 +21,10 @@ export let isPostToken: boolean = false;
  * @return {*}  {boolean}
  */
 export const isTokenUrl = (url?: string): boolean => {
-  return url != null && (url == TOKEN_URL || url.endsWith(TOKEN_URL));
+  return (
+    url != null &&
+    (url == TOKEN_URL || url.endsWith(TOKEN_URL) || url == TOKEN_LOGOUT_URL)
+  );
 };
 
 /**
@@ -158,7 +162,7 @@ export const handleToken = async (
  */
 export const refreshToken = async (token: TokenDto): Promise<TokenDto> => {
   console.log('refreshToken', token);
-  var newToken = await TokenService.RefreshToken({
+  var newToken = await TokenService.refreshToken({
     client_id: env.client_id,
     client_secret: env.client_secret,
     refresh_token: token.refresh_token,

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import { login, isLogined, getAuthUrl } from '../../apis/auth/TokenController';
-// import { router } from '../routes';
+import { TokenService } from '../../apis/auth/TokenService';
 
 import { message } from 'ant-design-vue';
 import {
@@ -65,6 +65,17 @@ onMounted(() => {
   });
 });
 
+const logout = () => {
+  console.log('logout');
+  TokenService.logout()
+    .then((res) => {
+      console.log('logout', res);
+    })
+    .catch((err) => {
+      console.warn('logout err', err);
+    });
+};
+
 // const { appId, appName, author, websize, version, copyright } = useAppInfo();
 </script>
 
@@ -87,7 +98,15 @@ onMounted(() => {
           <a-button type="primary" html-type="submit">{{
             t('Login')
           }}</a-button>
+
+          <a-button type="primary" @click="logout">{{ t('Logout') }}</a-button>
         </a-form-item>
+        <a
+          href="http://10.0.5.20:8043/.well-known/openid-configuration"
+          target="_blank"
+          >openid-configuration</a
+        >
+
         <!-- {{ locale }} -->
       </a-form>
     </div>

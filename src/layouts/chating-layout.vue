@@ -65,7 +65,7 @@ const handleOk = (e: MouseEvent) => {
 
 <template>
   <div class="flex flex-row items-stretch flex-1 h-full">
-    <a-modal
+    <!-- <a-modal
       class="drop-viewer"
       v-model:open="isOpen"
       :width="480"
@@ -77,9 +77,7 @@ const handleOk = (e: MouseEvent) => {
       @cancel="handleCancel"
     >
       4556565
-
-      <!-- <NuxtPage name="model" /> -->
-    </a-modal>
+    </a-modal> -->
     <NuxtRouteAnnouncer>
       <template #default="{ message }">
         <p>{{ message }} was loaded.</p>

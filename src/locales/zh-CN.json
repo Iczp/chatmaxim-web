@@ -199,5 +199,6 @@
   "LoadError": "加载错误",
   "srceenshot": "屏幕快照",
   "clipboard:image": "剪切板图片",
-  "loading": "正在加载({0})..."
+  "loading": "正在加载({0})...",
+  "Logout": "退出"
 }

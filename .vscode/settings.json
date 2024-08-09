@@ -2,5 +2,6 @@
     "vue-i18n.i18nPaths": "src\\locales",
     "i18n-ally.localesPaths": [
         "src/locales"
-    ]
+    ],
+    "i18n-ally.keystyle": "nested"
 }

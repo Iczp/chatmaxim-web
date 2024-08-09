@@ -18,7 +18,7 @@ import { type SessionItemDto } from '../../apis/dtos';
 // import { useI18n } from 'vue-i18n';
 // import { Plus } from '../icons';
 
-const  showContextMenuForSession = ()=>{}
+const showContextMenuForSession = () => {};
 
 definePageMeta({
   layout: 'chating-layout',
@@ -28,8 +28,7 @@ definePageMeta({
     return key;
   },
   keepAlive: true,
-  validate:(route)=>{
-
+  validate: (route) => {
     return Number(route.params.chatObjectId) > 0;
   },
 });
@@ -43,7 +42,6 @@ const { t } = useI18n();
 const props = defineProps<{
   // chatObjectId: number | undefined;
 }>();
-
 
 const store = useImStore();
 
@@ -62,14 +60,18 @@ const {
   isPendingOfFetchHistorical,
 } = useSessionUnitList({ ownerId: Number(chatObjectId) });
 
-const currentChatObject = computed(() => store.getChatObject(chatObjectId)?.owner);
+const currentChatObject = computed(
+  () => store.getChatObject(chatObjectId)?.owner
+);
 
 const acitveSessionUnitId = computed(() => route.params.sessionUnitId);
 
 const flashSessionUnitId = ref<string>();
 
 const displayItems = computed<SessionItemDto[]>(() =>
-  store.searchSessionItems(chatObjectId, keyword.value).filter(x => !x.isSeparated),
+  store
+    .searchSessionItems(chatObjectId, keyword.value)
+    .filter((x) => !x.isSeparated)
 );
 
 const setFlash = (sessionUnitId: string) => {
@@ -108,12 +110,10 @@ const onItemClick = (item: SessionItemDto) => {
   const entity = store.getSessionUnit(item.id!);
   console.log('onItemClick', item, entity);
   navToChat({
-    chatObjectId:item.ownerId!,
+    chatObjectId: item.ownerId!,
     sessionUnitId: item.id!,
   });
 };
-
-
 
 const keyword = ref<string>('');
 
@@ -128,8 +128,15 @@ const onReachEnd = (event: CustomEvent) => {
   // const el = event.target as HTMLElement;
   console.info('onReachEnd', displayItems.value.length);
 
-  if (isBof.value || isPendingOfFetchHistorical.value) {
-    console.warn('onReachEnd isBof or isPending');
+  if (isBof.value) {
+    console.warn('onReachEnd isBof', isBof.value);
+    return;
+  }
+  if (isPendingOfFetchHistorical.value) {
+    console.warn(
+      'onReachEnd isPendingOfFetchHistorical:',
+      isPendingOfFetchHistorical.value
+    );
     return;
   }
   fetchHistorical('onReachEnd');
@@ -152,7 +159,7 @@ const init = () => {
   }
   fetchLatest({
     caller: 'onActivated',
-  }).catch(err => {
+  }).catch((err) => {
     // fetchLatestTimer = setTimeout(init, 1000 * 10);
   });
 };
@@ -173,16 +180,18 @@ onDeactivated(() => {
 </script>
 
 <template>
-  <main class="flex flex-row h-full ">
-    <aside class="border-r nav-side ">
+  <main class="flex flex-row h-full">
+    <aside class="border-r nav-side">
       <header class="nav-side-header">
         <div class="current-chat-object">
           <ChatObject :entity="currentChatObject">
             <template #sub>
-              <ServiceStatus :status="currentChatObject?.serviceStatus" :is-text="true">
+              <ServiceStatus
+                :status="currentChatObject?.serviceStatus"
+                :is-text="true"
+              >
                 <span>在线</span>
               </ServiceStatus>
-             
             </template>
           </ChatObject>
           <a-space direction="horizontal" :size="12" split="|">
@@ -228,9 +237,14 @@ onDeactivated(() => {
           ></Loading>
         </template>
         <template #after>
-          <Loading v-if="isPendingOfFetchHistorical" :text="t('loading')"></Loading>
+          <Loading
+            v-if="isPendingOfFetchHistorical"
+            :text="t('loading')"
+          ></Loading>
         </template>
-        <template v-slot="{ item, index }: { item: SessionItemDto, index: number }">
+        <template
+          v-slot="{ item, index }: { item: SessionItemDto, index: number }"
+        >
           <SessionItem
             :id="item.id"
             :index="index"
@@ -251,7 +265,7 @@ onDeactivated(() => {
           <component :is="Component" :key="route.path" />
         </keep-alive>
       </router-view> -->
-      <NuxtPage :keepalive="{max:10}" />
+      <NuxtPage :keepalive="{ max: 10 }" />
     </main>
   </main>
 </template>

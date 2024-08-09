@@ -112,7 +112,7 @@ const {
 } = useSessionUnitId(sessionUnitId);
 
 const chatTitle = computed(
-  () => destinationName.value || props.title || (route.query.title as string)
+  () =>detail.value?.destination?.name || destinationName.value || props.title || (route.query.title as string)
 );
 // const chatTitle = ref(destinationName.value || props.title || (route.query.title as string));
 
@@ -285,7 +285,7 @@ const _onActivated = () => {
   scrollToTop();
   //fetchDetail
   if (!detail.value) {
-    fetchDetail();
+    fetchDetail()
   }
   fetchLatest({
     caller: 'onActivated',
@@ -806,7 +806,7 @@ const onTransfer = () => {
     <page-footer class="footer">
       <ChatInput
         ref="chatInput"
-        :disabled="!isInputEnabled"
+        :disabled="detail?.setting?.isInputEnabled!=true && !isInputEnabled"
         v-model:value="textValue"
         :mentions="[]"
         @send="onSend"

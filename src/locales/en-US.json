@@ -198,5 +198,6 @@
   "LoadError": "load error",
   "srceenshot": "Srceenshot",
   "clipboard:image": "clipboard-image",
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "Logout": "Logout"
 }

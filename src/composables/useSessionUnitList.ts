@@ -1,7 +1,7 @@
-import { Ref, onActivated, onDeactivated, ref } from 'vue';
+import { type Ref, onActivated, onDeactivated, ref } from 'vue';
 import { SessionUnitService } from '../apis';
-import { SessionUnitOwnerDto } from '../apis/dtos';
-import { SessionUnitGetListInput } from '../apis/dtos/SessionUnitGetListInput';
+import { type SessionUnitOwnerDto } from '../apis/dtos';
+import { type SessionUnitGetListInput } from '../apis/dtos/SessionUnitGetListInput';
 import { useImStore } from '../stores/imStore';
 export type FetchSessionUnitResult = {
   items: SessionUnitOwnerDto[];
@@ -32,18 +32,22 @@ export const useSessionUnitList = ({
 
   const setMaxMessageId = (items: SessionUnitOwnerDto[]): void => {
     maxMessageId.value =
-      Math.max(maxMessageId.value || 0, ...items.map(x => x.lastMessage?.id || 0)) || undefined;
+      Math.max(
+        maxMessageId.value || 0,
+        ...items.map((x) => x.lastMessage?.id || 0)
+      ) || undefined;
     console.log('setMaxMessageId', maxMessageId.value);
   };
 
   const setMinMessageId = (items: SessionUnitOwnerDto[]): void => {
-    minMessageId.value = Math.min(...items.map(x => x.lastMessage?.id || 0)) || undefined;
+    minMessageId.value =
+      Math.min(...items.map((x) => x.lastMessage?.id || 0)) || undefined;
     console.log('setMinMessageId', minMessageId.value);
   };
 
   const fetchItems = async (
     query: SessionUnitGetListInput,
-    isLast: boolean,
+    isLast: boolean
   ): Promise<SessionUnitOwnerDto[]> => {
     const req = { maxResultCount, ownerId, ...query };
     console.log('fetchItems query', req);
@@ -57,18 +61,22 @@ export const useSessionUnitList = ({
     return items;
   };
 
-  const fetchLatest = async ({ caller }: { caller?: string }): Promise<FetchSessionUnitResult> =>
+  const fetchLatest = async ({
+    caller,
+  }: {
+    caller?: string;
+  }): Promise<FetchSessionUnitResult> =>
     new Promise(async (resolve, reject) => {
       if (isPendingOfFetchLatest.value) {
         reject(
-          `fetchLatest caller:${caller},isPendingForFetchLatest:${isPendingOfFetchLatest.value}`,
+          `fetchLatest caller:${caller},isPendingForFetchLatest:${isPendingOfFetchLatest.value}`
         );
         return;
       }
       isPendingOfFetchLatest.value = true;
       console.warn('fetchLatest caller', caller);
       fetchItems({ minMessageId: maxMessageId.value }, true)
-        .then(items => {
+        .then((items) => {
           // console.log(
           //   'fetchLatest',
           //   items.map(x => x.id),
@@ -84,13 +92,13 @@ export const useSessionUnitList = ({
   const fetchHistorical = (caller?: string): Promise<FetchSessionUnitResult> =>
     new Promise(async (resolve, reject) => {
       if (isBof.value) {
-        reject({ message: '没有了' });
-        return;
+        // reject({ message: '没有了' });
+        // return;
       }
       isPendingOfFetchHistorical.value = true;
       console.warn('fetchHistorical caller', caller);
       fetchItems({ maxMessageId: minMessageId.value }, false)
-        .then(items => {
+        .then((items) => {
           isBof.value = items.length < maxResultCount;
           if (items.length == 0) {
             reject({ message: '没有数据' });
@@ -103,7 +111,7 @@ export const useSessionUnitList = ({
           // );
           resolve({ items, list, maxResultCount });
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         })
         .finally(() => {
