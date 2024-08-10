@@ -29,7 +29,7 @@ if (code) {
     })
     .finally(() => {
       isPending.value = false;
-      window.close();
+      // window.close();
     });
 }
 </script>

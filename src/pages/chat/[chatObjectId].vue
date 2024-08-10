@@ -285,7 +285,7 @@ onDeactivated(() => {
 }
 
 .scroller::-webkit-scrollbar {
-  width: 1px;
+  width: 6px;
   height: 6px;
   /* padding: 10px; */
   transition: all 0.3s linear;

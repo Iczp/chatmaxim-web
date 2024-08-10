@@ -79,10 +79,10 @@ export const getTheme = () => {
   return windowStore.colorScheme == 'dark' ? 'dark' : 'default';
 };
 
-export const getDeviceId = () => {
-  const windowStore = useWindowStore();
-  return windowStore.machineId;
-};
+// export const getDeviceId = () => {
+//   const windowStore = useWindowStore();
+//   return windowStore.machineId;
+// };
 
 export const openMediaViewer = (item: MessageDto) => {};
 

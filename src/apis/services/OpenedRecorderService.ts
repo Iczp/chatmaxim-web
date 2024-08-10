@@ -106,7 +106,7 @@ messageId: number,
 /**
  * 设备id
  */
-deviceId?: string,
+deviceId?: string | null,
 }): CancelablePromise<IczpNet_Chat_OpenedRecorders_Dtos_OpenedRecorderDto> {
         return __request(OpenAPI, {
             method: 'POST',

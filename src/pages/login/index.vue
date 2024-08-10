@@ -61,6 +61,9 @@ onMounted(() => {
       // 处理登录成功
       console.info('登录成功');
       navigateTo('/');
+      setTimeout(() => {
+        // location.reload();
+      }, 300);
     }
   });
 });

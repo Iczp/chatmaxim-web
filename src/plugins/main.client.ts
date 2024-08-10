@@ -7,7 +7,9 @@ import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css';
 import { PerfectScrollbarPlugin } from 'vue3-perfect-scrollbar';
 import 'vue3-perfect-scrollbar/style.css';
 
-export default defineNuxtPlugin((nuxtApp) => {
+import { generateDeviceId } from '../utils/deviceIdHelper';
+
+export default defineNuxtPlugin(async (nuxtApp) => {
   nuxtApp.vueApp.use(VueVirtualScroller);
   nuxtApp.vueApp.use(ContextMenu);
 
@@ -15,4 +17,6 @@ export default defineNuxtPlugin((nuxtApp) => {
     // tag: 'scroll-view',
     componentName: 'scroll-view',
   });
+
+  await generateDeviceId();
 });

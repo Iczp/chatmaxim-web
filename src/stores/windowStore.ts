@@ -2,6 +2,8 @@ import { acceptHMRUpdate, defineStore } from 'pinia';
 import type { WindowState } from '../types/WindowState';
 // import { useShortcutStore } from './shortcutStore';
 
+
+
 const defaultValue: WindowState = {
   machineId: undefined,
   windowId: undefined,
