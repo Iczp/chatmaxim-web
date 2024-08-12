@@ -33,7 +33,7 @@ export const OpenAPI: OpenAPIConfig = {
   HEADERS: {
     'app-id': env.app_id,
     'app-version': version,
-    'app-platform': process.platform,
+    // 'app-platform': process.platform,
   },
   ENCODE_PATH: undefined,
 };

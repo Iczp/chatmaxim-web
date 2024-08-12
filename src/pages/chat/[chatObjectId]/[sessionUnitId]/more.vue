@@ -1,3 +1,3 @@
 <template>
-  {{ $route.params }}
+  <div>setting</div>
 </template>

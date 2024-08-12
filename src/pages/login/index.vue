@@ -15,6 +15,19 @@ import type { TokenDto } from '../../apis/auth/dto';
 // import { useI18n } from 'vue-i18n';
 // import { openAppSettings } from '../ipc/openAppSettings';
 
+definePageMeta({
+  layout: 'chating-model',
+//   key: (route) => {
+//     const key = `/chat/${route.params.chatObjectId}`;
+//     // console.log('keepAliveKey', key, route);
+//     return key;
+//   },
+  // keepAlive: true,
+  // validate: (route) => {
+  //   return Number(route.params.chatObjectId) > 0;
+  // },
+});
+
 const { t, d, n, locale, availableLocales } = useI18n();
 availableLocales.forEach((locale: any) => {
   console.log(`${locale} locale messages`, locale);

@@ -112,7 +112,11 @@ const {
 } = useSessionUnitId(sessionUnitId);
 
 const chatTitle = computed(
-  () =>detail.value?.destination?.name || destinationName.value || props.title || (route.query.title as string)
+  () =>
+    detail.value?.destination?.name ||
+    destinationName.value ||
+    props.title ||
+    (route.query.title as string)
 );
 // const chatTitle = ref(destinationName.value || props.title || (route.query.title as string));
 
@@ -285,7 +289,7 @@ const _onActivated = () => {
   scrollToTop();
   //fetchDetail
   if (!detail.value) {
-    fetchDetail()
+    fetchDetail();
   }
   fetchLatest({
     caller: 'onActivated',
@@ -338,6 +342,18 @@ const _onActivated = () => {
     setReadedMessageId({ sessionUnitId, messageId: lastMessageId.value! });
   }
 };
+
+setReadedMessageId({ sessionUnitId, isForce: true });
+
+// watch(
+//   () => lastMessageId.value,
+//   (v) => {
+//     if (v) {
+//       console.warn('lastMessageId', v);
+//       setReadedMessageId({ sessionUnitId, messageId: v });
+//     }
+//   }
+// );
 
 if (isSeparated) {
   onMounted(_onActivated);
@@ -688,9 +704,31 @@ const onTransfer = () => {
 // const mentionsStore = useMentionsStore();
 
 // mentionsStore.fetchData(sessionUnitId);
+
+const handleCancel = (e: MouseEvent) => {
+  // emits('cancel');
+  console.log('handleCancel', e);
+};
+
+const handleOk = (e: MouseEvent) => {
+  console.log(e);
+};
+const isOpen = ref(true);
 </script>
 
 <template>
+  {{ $route.path }}
+  <a-modal
+    class="drop-viewer"
+    v-model:open="isOpen"
+    :width="480"
+    :cancel-text="t('Cancel')"
+    @ok="handleOk"
+    @cancel="handleCancel"
+  >
+    <NuxtPage />
+  </a-modal>
+
   <page class="chat-page" v-drop="dropHandle">
     <PageTitle
       :title="chatTitle"
@@ -806,7 +844,7 @@ const onTransfer = () => {
     <page-footer class="footer">
       <ChatInput
         ref="chatInput"
-        :disabled="detail?.setting?.isInputEnabled!=true && !isInputEnabled"
+        :disabled="detail?.setting?.isInputEnabled != true && !isInputEnabled"
         v-model:value="textValue"
         :mentions="[]"
         @send="onSend"

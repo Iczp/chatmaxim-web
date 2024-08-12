@@ -1,4 +1,4 @@
-// import moment from 'moment';
+import moment from 'moment';
 import { env } from '../env';
 // import { router } from '../routes';
 import type {
@@ -86,16 +86,16 @@ export function formatMessageTime(datetime: Date | string): any {
       }
     }
   }
-  return datetime;
-  // return moment(datetime).format(fmt);
+  // return datetime;
+  return moment(datetime).format(fmt);
 }
 
 export const formatDatetime = (
   datetime: Date | string,
   fmt = 'YYYY-MM-DD HH:mm:ss'
 ) => {
-  return datetime;
-  // return moment(datetime).format(fmt);
+  // return datetime;
+  return moment(datetime).format(fmt);
 };
 
 export const formatHourStr = (date: Date) => {
