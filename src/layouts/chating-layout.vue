@@ -84,6 +84,8 @@ const handleOk = (e: MouseEvent) => {
       </template>
     </NuxtRouteAnnouncer>
 
+    <!-- <slot name="model"><div>model-layout</div></slot> -->
+
     <Sider> </Sider>
 
     <div class="flex flex-col flex-1 w-full h-full overflow-hidden">
@@ -91,5 +93,6 @@ const handleOk = (e: MouseEvent) => {
         <slot></slot>
       </KeepAlive>
     </div>
+     
   </div>
 </template>

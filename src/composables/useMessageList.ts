@@ -1,12 +1,12 @@
-import { Ref, onActivated, onDeactivated, ref } from 'vue';
+import { type Ref, onActivated, onDeactivated, ref } from 'vue';
 import { MessageService } from '../apis';
-import { MessageDto, MessageOwnerDto } from '../apis/dtos';
-import { MessageGetListInput } from '../apis/dtos/MessageGetListInput';
+import type { MessageDto, MessageOwnerDto } from '../apis/dtos';
+import type { MessageGetListInput } from '../apis/dtos/MessageGetListInput';
 import { MessageStateEnums } from '../apis/enums';
 import { eventBus } from '../commons/eventBus';
 import { formatMessage } from '../utils/utils';
-import { ReceivedDto } from '../apis/websockets/ReceivedDto';
-import { Handler } from 'mitt';
+import type { ReceivedDto } from '../apis/websockets/ReceivedDto';
+import { type Handler } from 'mitt';
 export type FetchMessageResult = {
   items: MessageDto[];
   list: Ref<MessageDto[]>;
@@ -34,28 +34,32 @@ export const useMessageList = ({
 
   const setMaxMessageId = (items: MessageDto[]): void => {
     maxMessageId.value =
-      Math.max(maxMessageId.value || 0, ...items.map(x => x.id || 0)) || undefined;
+      Math.max(maxMessageId.value || 0, ...items.map((x) => x.id || 0)) ||
+      undefined;
     console.log('setMaxMessageId', maxMessageId.value);
   };
 
   const setMinMessageId = (items: MessageDto[]): void => {
-    minMessageId.value = Math.min(...items.map(x => x.id || 0)) || undefined;
+    minMessageId.value = Math.min(...items.map((x) => x.id || 0)) || undefined;
     console.log('setMinMessageId', minMessageId.value);
   };
 
   const formatItems = (items: MessageOwnerDto[]): MessageDto[] => {
     return items.map(
-      x =>
+      (x) =>
         <MessageDto>{
           ...x,
           isSelf: sessionUnitId == x.senderSessionUnit?.id,
           state: MessageStateEnums.Ok,
           isShowTime: true,
-        },
+        }
     );
   };
 
-  const fetchItems = async (query: MessageGetListInput, isLast: boolean): Promise<MessageDto[]> => {
+  const fetchItems = async (
+    query: MessageGetListInput,
+    isLast: boolean
+  ): Promise<MessageDto[]> => {
     const req = { maxResultCount, sessionUnitId, ...query };
     console.log('fetchItems query', req);
     const ret = await service(req);
@@ -65,7 +69,7 @@ export const useMessageList = ({
       lastItem:
         list.value.length > 0
           ? isLast
-            ? list.value.findLast(x => x.state == MessageStateEnums.Ok)
+            ? list.value.findLast((x) => x.state == MessageStateEnums.Ok)
             : list.value[0]
           : undefined,
     });
@@ -76,18 +80,22 @@ export const useMessageList = ({
     return items;
   };
 
-  const fetchLatest = async ({ caller }: { caller?: string }): Promise<FetchMessageResult> =>
+  const fetchLatest = async ({
+    caller,
+  }: {
+    caller?: string;
+  }): Promise<FetchMessageResult> =>
     new Promise(async (resolve, reject) => {
       if (isPendingOfFetchLatest.value) {
         reject(
-          `fetchLatest caller:${caller},isPendingForFetchLatest:${isPendingOfFetchLatest.value}`,
+          `fetchLatest caller:${caller},isPendingForFetchLatest:${isPendingOfFetchLatest.value}`
         );
         return;
       }
       isPendingOfFetchLatest.value = true;
       console.warn('fetchLatest caller', caller);
       fetchItems({ minMessageId: maxMessageId.value }, true)
-        .then(items => {
+        .then((items) => {
           // console.log(
           //   'fetchLatest',
           //   items.map(x => x.id),
@@ -108,7 +116,7 @@ export const useMessageList = ({
       }
       isPendingOfFetchHistorical.value = true;
       fetchItems({ maxMessageId: minMessageId.value }, false)
-        .then(items => {
+        .then((items) => {
           isBof.value = items.length < maxResultCount;
           if (items.length == 0) {
             reject({ message: '没有数据' });
@@ -120,11 +128,11 @@ export const useMessageList = ({
           list.value = items.concat(list.value);
           console.log(
             'fetchHistorical',
-            items.map(x => x.id),
+            items.map((x) => x.id)
           );
           resolve({ items, list, maxResultCount });
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         })
         .finally(() => {
@@ -132,26 +140,34 @@ export const useMessageList = ({
         });
     });
 
-
   const onMessage = (callback: (e: MessageDto) => void): void => {
     // eventBus.on('chat', chatHandle);
+    console.warn('onMessage subject event', eventBus);
+    offMessage()
     eventBus.on('chat', ([data, receivedMessage]) => {
       console.log('onMessage', receivedMessage);
-      if (data.scopes.some(x => x.sessionUnitId == sessionUnitId)) {
+      if (data.scopes.some((x) => x.sessionUnitId == sessionUnitId)) {
         callback(receivedMessage);
       }
     });
   };
 
-  const offMessage = (handler?: Handler<[ReceivedDto<any>, MessageDto]>): void =>
-    eventBus.off('chat', handler);
+  const offMessage = (
+    handler?: Handler<[ReceivedDto<any>, MessageDto]>
+  ): void => {
+    // eventBus.off('chat', chatHandle);
+    console.warn('offMessage subject event', eventBus);
+    eventBus.off('chat', handler!);
+  };
 
-  onActivated(() => {});
+  onActivated(() => {
+    //
+  });
 
-  onDeactivated(offMessage);
+  // onDeactivated(offMessage);
 
   const cancelChecked = () => {
-    list.value.map(x => (x.checked = false));
+    list.value.map((x) => (x.checked = false));
   };
 
   return {

@@ -717,7 +717,7 @@ const isOpen = ref(true);
 </script>
 
 <template>
-  {{ $route.path }}
+  <!-- {{ $route.path }}
   <a-modal
     class="drop-viewer"
     v-model:open="isOpen"
@@ -727,7 +727,7 @@ const isOpen = ref(true);
     @cancel="handleCancel"
   >
     <NuxtPage />
-  </a-modal>
+  </a-modal> -->
 
   <page class="chat-page" v-drop="dropHandle">
     <PageTitle

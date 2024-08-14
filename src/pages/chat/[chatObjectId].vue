@@ -265,7 +265,11 @@ onDeactivated(() => {
           <component :is="Component" :key="route.path" />
         </keep-alive>
       </router-view> -->
-      <NuxtPage :keepalive="{ max: 10 }" />
+      <NuxtPage :keepalive="{ max: 10 }">
+        <template #model>
+          <div>Model</div>
+        </template>
+      </NuxtPage>
     </main>
   </main>
 </template>

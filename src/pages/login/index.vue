@@ -16,12 +16,12 @@ import type { TokenDto } from '../../apis/auth/dto';
 // import { openAppSettings } from '../ipc/openAppSettings';
 
 definePageMeta({
-  layout: 'chating-model',
-//   key: (route) => {
-//     const key = `/chat/${route.params.chatObjectId}`;
-//     // console.log('keepAliveKey', key, route);
-//     return key;
-//   },
+  layout: 'chating-layout',
+  //   key: (route) => {
+  //     const key = `/chat/${route.params.chatObjectId}`;
+  //     // console.log('keepAliveKey', key, route);
+  //     return key;
+  //   },
   // keepAlive: true,
   // validate: (route) => {
   //   return Number(route.params.chatObjectId) > 0;
@@ -67,13 +67,15 @@ const onFinishFailed = (errorInfo: any) => {
 
 onMounted(() => {
   console.log('onMounted');
-  window.addEventListener('message', (event) => {
+  window.addEventListener('message', async (event) => {
     const { status, token, error } = event.data;
     console.log('event', event, event.data);
     if (status === 'login-success') {
       // 处理登录成功
       console.info('登录成功');
-      navigateTo('/');
+      await navigateTo('/', {
+        replace: true,
+      });
       setTimeout(() => {
         // location.reload();
       }, 300);
