@@ -7,7 +7,6 @@ import {
   reactive,
   ref,
   onMounted,
-  defineModel,
 } from 'vue';
 import {
   type WaveOptions,

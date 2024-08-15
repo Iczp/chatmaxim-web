@@ -1,4 +1,12 @@
 <script lang="ts" setup>
+
+
+import ObjectPicker from './components/ObjectPicker.vue';
+// import {useBrowserColor} from '@vueuse/core';
+
+const createRoom = ref<InstanceType<typeof ObjectPicker> | null>(null);
+
+
 const isDark = useDark();
 const setBrowserColor = (isDark: boolean) =>
   useBrowserColor({
@@ -11,6 +19,7 @@ watch(isDark, setBrowserColor);
 
 <template>
   <div class="w-full h-full">
+    <ObjectPicker ref="createRoom" />
     <NuxtRouteAnnouncer>
       <template #default="{ message }">
         <p>{{ message }} was loaded.</p>

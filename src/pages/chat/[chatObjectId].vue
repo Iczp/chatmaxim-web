@@ -18,6 +18,11 @@ import { type SessionItemDto } from '../../apis/dtos';
 // import { useI18n } from 'vue-i18n';
 // import { Plus } from '../icons';
 
+import ObjectPicker from '../../components/ObjectPicker.vue';
+
+
+const createRoom = ref<InstanceType<typeof ObjectPicker> | null>(null);
+
 const showContextMenuForSession = () => {};
 
 definePageMeta({
@@ -150,6 +155,8 @@ const onPlus = () => {
   //   chatObjectId: props.chatObjectId!,
   // });
   console.log('onPlus');
+
+  
 };
 
 let fetchLatestTimer: NodeJS.Timeout | undefined;

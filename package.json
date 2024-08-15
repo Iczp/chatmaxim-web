@@ -34,7 +34,8 @@
     "vue-i18n": "^9.13.1",
     "vue-virtual-scroller": "^2.0.0-beta.8",
     "vue3-emoji-picker": "^1.1.8",
-    "vue3-perfect-scrollbar": "^2.0.0"
+    "vue3-perfect-scrollbar": "^2.0.0",
+    "vue3-text-clamp": "^0.1.2"
   },
   "devDependencies": {
     "@types/vue-virtual-scroller": "npm:@earltp/vue-virtual-scroller@^1.0.1",

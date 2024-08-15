@@ -343,7 +343,7 @@ const _onActivated = () => {
   }
 };
 
-setReadedMessageId({ sessionUnitId, isForce: true });
+// setReadedMessageId({ sessionUnitId, isForce: true });
 
 // watch(
 //   () => lastMessageId.value,

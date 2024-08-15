@@ -92,8 +92,8 @@ export const useSessionUnitList = ({
   const fetchHistorical = (caller?: string): Promise<FetchSessionUnitResult> =>
     new Promise(async (resolve, reject) => {
       if (isBof.value) {
-        // reject({ message: '没有了' });
-        // return;
+        reject({ message: '没有了' });
+        return;
       }
       isPendingOfFetchHistorical.value = true;
       console.warn('fetchHistorical caller', caller);
