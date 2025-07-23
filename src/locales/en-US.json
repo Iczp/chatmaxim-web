@@ -199,5 +199,6 @@
   "srceenshot": "Srceenshot",
   "clipboard:image": "clipboard-image",
   "loading": "Loading...",
-  "Logout": "Logout"
+  "Logout": "Logout",
+  "Setting": "setting"
 }

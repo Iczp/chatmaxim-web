@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { useWebSocketKit } from '../apis/websockets/useWebSocketKit';
+import { type BadgeDto } from '../apis/dtos';
 
+import AppSettingModal from './AppSettingModal.vue';
 const { t } = useI18n();
 const route = useRoute();
 
 const { badge, badgeItems, refresh } = useBadges();
 
-import { type BadgeDto } from '../apis/dtos';
+const appSettingRef = ref<InstanceType<typeof AppSettingModal> | null>();
 
 useWebSocketKit({
   onConnected(ws) {
@@ -41,6 +43,11 @@ const menus = ref([
     to: '/login',
     label: 'login',
     icon: 'ic:sharp-person',
+    click: ({ item }: any) => {
+      console.log('item.to', item.to);
+
+      navigateTo(item.to);
+    },
   },
   {
     to: 'https://icones.js.org/collection/all',
@@ -59,12 +66,19 @@ const footerMenus = ref([
     label: 'profile',
     icon: 'ic:sharp-person',
     dot: true,
+    click: ({ item }: { item: any }) => {
+      navigateTo(item.to);
+    },
   },
   {
     to: '/_tailwind/',
     label: '_tailwind/',
     target: '_blank',
     icon: 'ic:baseline-settings',
+    click: ({ item }: { item: any }) => {
+      console.log('item', item);
+      appSettingRef.value?.open();
+    },
   },
 ]);
 
@@ -93,9 +107,9 @@ const navToChatHitory = (item: BadgeDto) => {
 
 const activeId = ref<string | undefined>();
 
-const onItemClick = (item: any) => {
-  console.log('onItemClick', item);
-  item.click && item.click(item);
+const onItemClick = (args: { item: any; event: MouseEvent }) => {
+  console.log('onItemClick', args);
+  args.item.click && args.item.click(args);
 };
 </script>
 
@@ -103,6 +117,7 @@ const onItemClick = (item: any) => {
   <aside
     class="aside flex flex-col bg-gray-900 w-[--sider-width] justify-between text-gray-100 py-4"
   >
+    <AppSettingModal ref="appSettingRef" />
     <header>
       <OwnerList />
 

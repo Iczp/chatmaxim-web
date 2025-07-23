@@ -200,5 +200,6 @@
   "srceenshot": "屏幕快照",
   "clipboard:image": "剪切板图片",
   "loading": "正在加载({0})...",
-  "Logout": "退出"
+  "Logout": "退出",
+  "Setting": "设置"
 }

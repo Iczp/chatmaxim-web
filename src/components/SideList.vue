@@ -7,8 +7,9 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits(['item-click']);
-const onItemClick = (item: any) => {
-  emit('item-click', item);
+const onItemClick = (item: any, event: MouseEvent) => {
+  // console.log('ddddddddd',item);
+  emit('item-click', { item, event });
 };
 </script>
 
@@ -24,16 +25,20 @@ const onItemClick = (item: any) => {
       }"
     >
       <a-badge :count="item.badge" :dot="item.dot">
-        <NuxtLink
+        <div
           :to="item.to"
           :target="item.target"
-          class="relative flex items-center justify-center bg-gray-800 rounded-md size-9 hover:bg-gray-700 hover:ring-gray-500 hover:ring-1 hover:rounded-md"
+          class="relative flex items-center justify-center bg-gray-800 rounded-md cursor-pointer size-9 hover:bg-gray-700 hover:ring-gray-500 hover:ring-1 hover:rounded-md"
           :title="item.label"
-          @click="onItemClick(item)"
+          @click="onItemClick(item, $event)"
         >
-          <Icon v-if="item.icon" :name="item.icon" class="text-2xl" />
+          <Icon
+            v-if="item.icon"
+            :name="item.icon"
+            class="text-2xl text-gray-200"
+          />
           <!-- {{ item.label }} -->
-        </NuxtLink>
+        </div>
       </a-badge>
     </li>
   </ul>

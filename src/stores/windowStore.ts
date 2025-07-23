@@ -4,6 +4,7 @@ import type { WindowState } from '../types/WindowState';
 
 
 
+
 const defaultValue: WindowState = {
   machineId: undefined,
   windowId: undefined,
